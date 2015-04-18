@@ -21,12 +21,22 @@ TextureHandler::TextureHandler()
 	t = new sf::Texture();
 	t->loadFromFile(_resourcePath + "Textures/test.png");
 	_textures.push_back(std::make_pair(tt_test, t));
+    
 	t = new sf::Texture();
-	t->loadFromFile(_resourcePath + "Textures/player.png");
-	_textures.push_back(std::make_pair(tt_player, t));
-	t = new sf::Texture();
-	t->loadFromFile(_resourcePath + "Textures/wall.png");
+	t->loadFromFile(_resourcePath + "Textures/placeholder_wall.png");
 	_textures.push_back(std::make_pair(tt_wall, t));
+
+    t = new sf::Texture();
+	t->loadFromFile(_resourcePath + "Textures/carrot_animation_4.png");
+	_textures.push_back(std::make_pair(tt_player_animation_4, t));
+    
+    t = new sf::Texture();
+	t->loadFromFile(_resourcePath + "Textures/placeholder_rabbit.png");
+	_textures.push_back(std::make_pair(tt_rabbit, t));
+    
+    t = new sf::Texture();
+	t->loadFromFile(_resourcePath + "Textures/placeholder_plant.png");
+	_textures.push_back(std::make_pair(tt_plant, t));
 }
 
 
