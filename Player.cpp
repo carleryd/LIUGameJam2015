@@ -14,7 +14,8 @@ Player::Player(World* pWorld) : Entity(pWorld)
 	_Sprite.setOrigin(32, 32);
 
 	//temp
-	//c
+	c = new sf::CircleShape(4);
+	c->setFillColor(sf::Color::Black);
 }
 
 
@@ -58,6 +59,8 @@ void Player::Update()
 
 	sf::Vector2f direction(cos(_Rotation), sin(_Rotation));
 	Utility::Normalize(direction);
+	c->setPosition(direction);
+	c->draw();
 	_Sprite.move(direction.x * _Speed, direction.y * _Speed);
 }
 
