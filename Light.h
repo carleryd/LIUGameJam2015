@@ -10,6 +10,7 @@ public:
 	Light(World* pWorld, Player* p);
 	~Light(){};
 	void draw();
+	void update(sf::Vector2f v, float rotation);
 private:
 	sf::Vector2f _left;
 	sf::Vector2f _right;
