@@ -43,6 +43,9 @@ TextureHandler::TextureHandler()
 	_textures.push_back(std::make_pair(tt_floor, t));
 }
 
+std::string TextureHandler::getResourcePath() {
+    return _resourcePath;
+}
 
 TextureHandler::~TextureHandler()
 {

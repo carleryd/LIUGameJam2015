@@ -10,6 +10,7 @@ public:
 	TextureHandler();
 	~TextureHandler();
 	sf::Texture* getTexture(TextureType type);
+    std::string getResourcePath();
 
 private:
 	std::list<std::pair<TextureType, sf::Texture*> > _textures;

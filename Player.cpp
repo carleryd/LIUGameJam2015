@@ -77,6 +77,36 @@ void Player::Update()
 	sf::Vector2f tempPosY = getPosition();
 	tempPosX.x += deltaSpeed.x;
 	tempPosY.y += deltaSpeed.y;
+    
+    sf::Vector2f spawnPosition(500, 700);
+    for(Entity* e : _pWorld->_rabbits) {
+		//Colission in X
+		if(Utility::SSCollision(tempPosX, getOrigin(), getSize(), e->getPosition(), e->getOrigin(), e->getSize()))
+		{
+            if(deltaSpeed.x > 0)
+            {
+                setPosition(spawnPosition);
+            }
+            else if(deltaSpeed.x < 0)
+            {
+                setPosition(spawnPosition);
+            }
+            deltaSpeed.x = 0;
+		}
+		//Colission in Y
+		if(Utility::SSCollision(tempPosY, getOrigin(), getSize(), e->getPosition(), e->getOrigin(), e->getSize()))
+		{
+            if(deltaSpeed.y > 0)
+            {
+                setPosition(spawnPosition);
+            }
+            else if(deltaSpeed.y < 0)
+            {
+                setPosition(spawnPosition);
+            }
+            deltaSpeed.y = 0;
+        }
+    }
 	for(Entity* e : _pWorld->_level->_entities)
 	{
 		//Colission in X

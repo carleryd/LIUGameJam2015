@@ -38,7 +38,7 @@ bool EnemyRabbit::aggro() {
     sf::Vector2f diff = _pWorld->_pPlayer->getPosition() - getPosition();
     float length = fabs(sqrt(pow(diff.x, 2) + pow(diff.y, 2)));
     
-    if(length < 9001) {
+    if(length < 200) {
         return true;
     }
     return false;

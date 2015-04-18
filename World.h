@@ -20,7 +20,8 @@ public:
 	
 	TextureHandler _textureHandler;
 	Level* _level;
-    std::list<Enemy*> rabbits;
+	std::list<Entity*> _entities;
+    std::list<Entity*> _rabbits;
 	Player* _pPlayer;
 	sf::RenderWindow* _pWindow;
 };
