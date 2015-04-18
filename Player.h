@@ -6,7 +6,7 @@ public:
 	Player(World* pWorld);
 	~Player();
 	void Update();
-	//void Draw();
+	void Draw();
 	void setRotation(float Rotation);
 
 private:

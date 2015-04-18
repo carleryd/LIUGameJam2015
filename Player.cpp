@@ -1,8 +1,10 @@
 #include "Player.h"
 #include "Utility.h"
+#include "World.h"
+#include <iostream>
 
 #define Acceleration 0.1
-#define TurnSpeed 0.1
+#define TurnSpeed 0.3
 
 
 Player::Player(World* pWorld) : Entity(pWorld)
@@ -14,7 +16,8 @@ Player::Player(World* pWorld) : Entity(pWorld)
 	_Sprite.setOrigin(32, 32);
 
 	//temp
-	c = new sf::CircleShape(4);
+	c = new sf::CircleShape(6);
+	c->setOrigin(3, 3);
 	c->setFillColor(sf::Color::Black);
 }
 
@@ -25,10 +28,13 @@ Player::~Player()
 }
 
 
-/*void Player::Draw()
+void Player::Draw()
 {
+	_pWorld->_pWindow->draw(_Sprite);
 
-}*/
+	//temp
+	_pWorld->_pWindow->draw(*c);
+}
 
 
 void Player::Update()
@@ -57,11 +63,13 @@ void Player::Update()
 	if(_Speed > _MaxSpeed)
 		_Speed = _MaxSpeed;
 
-	sf::Vector2f direction(cos(_Rotation), sin(_Rotation));
-	Utility::Normalize(direction);
-	c->setPosition(direction);
-	//c->draw();
+	sf::Vector2f direction(cos(Utility::DtoR(_Rotation)), sin(Utility::DtoR(_Rotation)));
+	Utility::Normalize(direction);	
 	_Sprite.move(direction.x * _Speed, direction.y * _Speed);
+
+	//tenp
+	Utility::vMul(direction, 50);
+	c->setPosition(_Sprite.getPosition() + direction);
 }
 
 
