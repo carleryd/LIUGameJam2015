@@ -33,6 +33,10 @@ float Utility::RtoD(const float& Radian)
 	return Radian * (180/PI);
 }
 
+sf::Vector2f Utility::mul(sf::Vector2f& a, sf::Vector2f&b)
+{
+	return sf::Vector2f(a.x * b.x, a.y * b.y);
+}
 
 bool Utility::SSCollision(sf::Vector2f Aposition, sf::Vector2f Aorigin, float Awidth, sf::Vector2f Bposition, sf::Vector2f Borigin, float Bwidth)
 {

@@ -23,6 +23,7 @@ Player::Player(World* pWorld) : Entity(pWorld, et_moving)
 	c = new sf::CircleShape(6);
 	c->setOrigin(3, 3);
 	c->setFillColor(sf::Color::Black);
+
 	_light = std::unique_ptr<Light>(new Light(pWorld, this));
 }
 
@@ -74,9 +75,13 @@ void Player::Update()
 	if(_speed > _maxSpeed)
 		_speed = _maxSpeed;
 
-	float rotationRadian = Utility::DtoR(_rotation);
-	sf::Vector2f direction(cos(rotationRadian), sin(rotationRadian));
-	Utility::Normalize(direction);
+	float r = _rotation;
+	sf::Vector2f direction(cos(Utility::DtoR(_rotation)), sin(Utility::DtoR(_rotation)));
+	Utility::Normalize(direction);	
+	_sprite.move(direction.x * _speed, direction.y * _speed);
+	
+	//_light->update(direction, r);
+
 
 	sf::Vector2f deltaSpeed(direction.x * _speed, direction.y * _speed);
 	sf::Vector2f tempPosX = getPosition();
@@ -125,6 +130,7 @@ void Player::Update()
 	//temp
 	Utility::vMul(direction, 50);
 	c->setPosition(_sprite.getPosition() + direction);
+	_light->update(direction, r);
 }
 
 
