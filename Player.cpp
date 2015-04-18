@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "Utility.h"
+#include "World.h"
 #include <math.h>
 
 #define Acceleration 0.1
@@ -8,7 +9,7 @@
 
 Player::Player(World* pWorld) : Entity(pWorld)
 {
-	setTexture("Textures/Player.png");
+	setTexture(pWorld->getResourcePath() + "Textures/Player.png");
 	_Rotation = 0;
 	_Speed = 0;
 	_MaxSpeed = 0.5;
