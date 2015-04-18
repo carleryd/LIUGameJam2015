@@ -8,11 +8,17 @@ public:
 	~Entity();
 	virtual void Update();
 	virtual void Draw();
-	virtual void setPosition(sf::Vector2f Position);
+	virtual void setSpritePos(sf::Vector2f Position);
 	virtual void setTexture(const std::string& filename, const sf::IntRect&	area=sf::IntRect());
+	void setPos(const sf::Vector2f pos);
+    void setSize(const sf::Vector2f size);
+    
+    sf::Vector2f getPos();
+    sf::Vector2f getSize();
 
 	World* _pWorld;
 protected:
 	sf::Texture _Texture;
 	sf::Sprite _Sprite;
+    sf::Vector2f _pos, _size;
 };
