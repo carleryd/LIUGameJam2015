@@ -15,6 +15,7 @@ public:
 	~World();
 	void Update();
 	void Draw();
+    Player* getPlayer();
 	
 	TextureHandler _textureHandler;
 	std::list<Entity*> entities;

@@ -65,6 +65,7 @@ void Player::Update()
 	if(_speed > 0.1) _walkDuration++;
     if(_walkDuration > 4000000000) _walkDuration = 0;
 	_sprite.setRotation(_rotation);
+    cout << "rotation: " << _rotation << endl;
 	_speed *= 0.8;
 
 	if(_speed > _maxSpeed)
@@ -121,20 +122,7 @@ void Player::Update()
 	_light->update(direction, _rotation);
 }
 
-
 void Player::setRotation(float Rotation)
 {
 	_sprite.setRotation(Rotation);
-}
-
-
-void Player::setPositionX(float x)
-{
-	_sprite.setPosition(x, _sprite.getPosition().y);
-}
-
-
-void Player::setPositionY(float y)
-{
-	_sprite.setPosition(_sprite.getPosition().x, y);
 }

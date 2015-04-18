@@ -58,6 +58,18 @@ void Entity::setPosition(const sf::Vector2f position)
 	_sprite.setPosition(position);
 }
 
+void Entity::setPositionX(float x)
+{
+	_sprite.setPosition(x, _sprite.getPosition().y);
+}
+
+
+void Entity::setPositionY(float y)
+{
+	_sprite.setPosition(_sprite.getPosition().x, y);
+}
+
+
 
 sf::Vector2f Entity::getPosition()
 {

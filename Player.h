@@ -13,8 +13,6 @@ public:
 	void setRotation(float Rotation);
 
 private:
-	void setPositionX(float x);
-	void setPositionY(float y);
 
 	float _rotation;
 	float _speed;
