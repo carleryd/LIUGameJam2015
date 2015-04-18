@@ -6,7 +6,7 @@ enum Direction { up, right, down, left };
 class Enemy : public Entity
 {
 public:
-	Enemy(World* pWorld);
+	Enemy(World* pWorld, EntityType entityType);
     
 protected:
     Direction _direction;

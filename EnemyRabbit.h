@@ -4,7 +4,7 @@ class World;
 class EnemyRabbit : public Enemy
 {
 public:
-    EnemyRabbit(World* pWorld);
+	EnemyRabbit(World* pWorld);
     void Update();
 
 private:

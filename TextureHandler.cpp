@@ -37,6 +37,10 @@ TextureHandler::TextureHandler()
     t = new sf::Texture();
 	t->loadFromFile(_resourcePath + "Textures/placeholder_plant.png");
 	_textures.push_back(std::make_pair(tt_plant, t));
+
+	t = new sf::Texture();
+	t->loadFromFile(_resourcePath + "Textures/placeholder_floor.png");
+	_textures.push_back(std::make_pair(tt_floor, t));
 }
 
 

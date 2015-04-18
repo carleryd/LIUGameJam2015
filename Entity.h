@@ -3,7 +3,7 @@
 #include <list>
 class World;
 
-enum EntityType {et_moving, et_wall, et_floor};
+enum EntityType {et_moving, et_wall, et_floor, et_plant, et_rabbit};
 
 class Entity
 {

@@ -7,7 +7,7 @@ World::World(sf::RenderWindow* pWindow)
 {
 	_pWindow = pWindow;
     
-	Entity* e = new Entity(this, et_wall);
+	/*Entity* e = new Entity(this, et_wall);
 	e->setTexture(_textureHandler.getTexture(tt_wall));
 	e->setPosition(sf::Vector2f(300.0, 300.0));
 	entities.push_back(e);
@@ -45,7 +45,13 @@ World::World(sf::RenderWindow* pWindow)
     entities.push_back(plant1);
     entities.push_back(plant2);
     entities.push_back(plant3);
-    rabbits.push_back(rabbit);
+	entities.push_back(rabbit);
+	*/
+	_level = new Level(this);
+	_pPlayer = new Player(this);
+	_pPlayer->setPosition(sf::Vector2f(200.0, 200.0));
+	_level->load("Levels/1.lvl");
+
 }
 
 
@@ -57,21 +63,21 @@ World::~World()
 void World::Update()
 {
 	_pPlayer->Update();
-    for(Enemy* rabbit : rabbits) {
-        rabbit->Update();
+	for(Entity* e :_level->_entities) {
+        e->Update();
     }
 }
 
 void World::Draw()
 {
 	_pWindow->clear(sf::Color::White);
-    for(Entity* e : entities) {
+    for(Entity* e : _level->_entities) {
 		e->Draw();
 	}
-    for(Enemy* rabbit : rabbits) {
+    /*for(Enemy* rabbit : rabbits) {
         rabbit->Draw();
         rabbit->Update();
-    }
+    }*/
 	_pPlayer->Draw();
     _pWindow->display();
 }

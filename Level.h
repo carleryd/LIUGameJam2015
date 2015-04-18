@@ -1,12 +1,17 @@
 #pragma once
 #include <vector>
-#include "Entity.h"
+class World;
+class Entity;
 
 class Level
 {
 public:
+	Level(World* pWorld);
+	~Level();
 	void load(const std::string filename);
 	void save(const std::string filename);
 
-	std::vector<Entity*> entities;
+	std::vector<Entity*> _entities;
+	World* _pWorld; 
+	float gridSize;
 };

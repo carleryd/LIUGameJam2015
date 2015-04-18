@@ -1,7 +1,7 @@
 #include "EnemyRabbit.h"
 #include <stdlib.h>
 
-EnemyRabbit::EnemyRabbit(World* pWorld) : Enemy(pWorld) {
+EnemyRabbit::EnemyRabbit(World* pWorld) : Enemy(pWorld, et_rabbit) {
 	_speed = 0.5;
 }
 

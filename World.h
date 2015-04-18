@@ -1,8 +1,9 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "TextureHandler.h"
-#include <list>
+#include <vector>
 #include <iostream>
+#include "Level.h"
 
 class Player;
 class Entity;
@@ -17,7 +18,7 @@ public:
 	void Draw();
 	
 	TextureHandler _textureHandler;
-	std::list<Entity*> entities;
+	Level* _level;
     std::list<Enemy*> rabbits;
 	Player* _pPlayer;
 	sf::RenderWindow* _pWindow;

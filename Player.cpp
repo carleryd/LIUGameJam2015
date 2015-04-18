@@ -84,7 +84,7 @@ void Player::Update()
 	sf::Vector2f tempPosY = getPosition();
 	tempPosX.x += deltaSpeed.x;
 	tempPosY.y += deltaSpeed.y;
-	for(Entity* e : _pWorld->entities)
+	for(Entity* e : _pWorld->_level->_entities)
 	{
 		//Colission in X
 		if(Utility::SSCollision(tempPosX, getOrigin(), getSize(), e->getPosition(), e->getOrigin(), e->getSize()))
@@ -94,7 +94,7 @@ void Player::Update()
 				if(deltaSpeed.x > 0)
 				{
 					setPositionX(e->getPosition().x - e->getOrigin().x - getSize() + getOrigin().x - 1);
-					std::cout <<"RIGHT\n";
+					std::cout <<e->getPosition().x <<" RIGHT\n";
 				}
 				else
 				{
