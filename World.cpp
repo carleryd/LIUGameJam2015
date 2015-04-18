@@ -16,11 +16,11 @@ World::World(sf::RenderWindow* pWindow)
     
 	_pWindow = pWindow;
 	Entity* e = new Entity(this);
-	e->setPos(sf::Vector2f(300.0, 300.0));
+	e->setPosition(sf::Vector2f(300.0, 300.0));
 	//Vet inte var man ska sätta sökvägen
 
 	_pPlayer = new Player(this);
-	_pPlayer->setPos(sf::Vector2f(200.0, 200.0));
+	_pPlayer->setPosition(sf::Vector2f(200.0, 200.0));
 
 	e->setTexture(_resourcePath + "Textures/test.png");
 

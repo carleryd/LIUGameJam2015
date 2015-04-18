@@ -4,6 +4,7 @@
 Entity::Entity(World* pWorld)
 {
 	_pWorld = pWorld;
+	_size = 64.0;
 }
 
 
@@ -24,10 +25,8 @@ void Entity::Draw()
 	_pWorld->_pWindow->draw(_sprite);
 }
 
-sf::Vector2f Entity::getPos() { return _pos; }
-sf::Vector2f Entity::getSize() { return _size; }
 
-void Entity::setSpritePos(sf::Vector2f Position) { _sprite.setPosition(Position); }
+
 void Entity::setTexture(const std::string& filename, const sf::IntRect& area)
 {
 	if(!_texture.loadFromFile(filename, area))
@@ -36,4 +35,27 @@ void Entity::setTexture(const std::string& filename, const sf::IntRect& area)
 	}
 	_sprite.setTexture(_texture);
 }
-void Entity::setPos(const sf::Vector2f pos) { _pos = pos; }
+
+
+void Entity::setPosition(const sf::Vector2f position)
+{
+	_sprite.setPosition(position);
+}
+
+
+sf::Vector2f Entity::getPosition()
+{
+	return _sprite.getPosition();
+}
+
+
+float Entity::getSize()
+{
+	return _size;
+}
+
+
+void Entity::setSize(float size)
+{
+	_size = size;
+}
