@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <list>
 class Entity;
+class Player;
 
 class World
 {
@@ -11,5 +12,6 @@ public:
 	void Draw();
 
 	std::list<Entity*> Entitys;
+	Player* _pPlayer;
 	sf::RenderWindow* _pWindow;
 };

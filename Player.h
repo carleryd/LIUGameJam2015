@@ -6,5 +6,14 @@ public:
 	Player(World* pWorld);
 	~Player();
 	void Update();
-	void Draw();
+	//void Draw();
+	void setRotation(float Rotation);
+
+private:
+	float _Rotation;
+	float _Speed;
+	float _MaxSpeed;
+
+	//temp
+	sf::CircleShape* c;
 };

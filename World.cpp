@@ -1,5 +1,5 @@
 #include "World.h"
-#include "Entity.h"
+#include "Player.h"
 
 World::World(sf::RenderWindow* pWindow)
 {
@@ -8,6 +8,9 @@ World::World(sf::RenderWindow* pWindow)
 	e->setPosition(sf::Vector2f(300.0, 300.0));
 	//Vet inte var man ska sätta sökvägen
 	e->setTexture("Textures/test.png");
+
+	_pPlayer = new Player(this);
+	_pPlayer->setPosition(sf::Vector2f(200.0, 200.0));
 	Entitys.push_back(e);
 }
 
@@ -19,7 +22,7 @@ World::~World()
 
 void World::Update()
 {
-
+	_pPlayer->Update();
 }
 
 
@@ -30,5 +33,6 @@ void World::Draw()
 	{
 		e->Draw();
 	}
+	_pPlayer->Draw();
     _pWindow->display();
 }
