@@ -1,7 +1,6 @@
 #include "Player.h"
 #include "Utility.h"
-#include "World.h"
-#include <iostream>
+#include <math.h>
 
 #define Acceleration 0.1
 #define TurnSpeed 0.3

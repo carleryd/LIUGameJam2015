@@ -1,4 +1,5 @@
 #include "Utility.h"
+#include <math.h>
 
 #define PI 3.14159265
 
@@ -19,8 +20,7 @@ void Utility::vMul(sf::Vector2f& v, const float f)
 {
 	v = sf::Vector2f(v.x * f, v.y * f);
 }
-//degree = radian * (180 / PI) // PI = 3.14159265
-//radian = degree * (PI/180) 
+
 
 float Utility::DtoR(const float& Degree)
 {

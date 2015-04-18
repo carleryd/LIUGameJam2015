@@ -3,6 +3,8 @@
 class Entity;
 class Player;
 
+using namespace std;
+
 class World
 {
 public:
@@ -10,8 +12,10 @@ public:
 	~World();
 	void Update();
 	void Draw();
+    string getResourcePath();
 
 	std::list<Entity*> Entitys;
 	Player* _pPlayer;
 	sf::RenderWindow* _pWindow;
+    string _resourcePath;
 };

@@ -14,7 +14,6 @@ Game::~Game()
 	delete _pWindow;
 }
 
-
 void Game::Run()
 {
     while (_pWindow->isOpen())
