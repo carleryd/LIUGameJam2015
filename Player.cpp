@@ -60,7 +60,7 @@ void Player::Update()
 	sf::Vector2f direction(cos(_Rotation), sin(_Rotation));
 	Utility::Normalize(direction);
 	c->setPosition(direction);
-	c->draw();
+	//c->draw();
 	_Sprite.move(direction.x * _Speed, direction.y * _Speed);
 }
 
