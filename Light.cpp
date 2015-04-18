@@ -3,6 +3,7 @@
 #include "Player.h"
 #include "Utility.h"
 #include <iostream>
+#include <math.h>
 using namespace std;
 
 Light::Light(World* pWorld, Player* p):
