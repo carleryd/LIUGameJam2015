@@ -1,6 +1,5 @@
 #include "World.h"
 #include "Player.h"
-#include "Entity.h"
 #include "OSHandler.h"
 
 World::World(sf::RenderWindow* pWindow)

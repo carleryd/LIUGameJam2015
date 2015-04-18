@@ -1,5 +1,5 @@
 #include "Utility.h"
-
+#include <math.h>
 
 float Utility::Length(const sf::Vector2f& v)
 {
