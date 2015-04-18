@@ -36,33 +36,51 @@ void Level::load(const std::string filename)
 			{
 				e = new Entity(_pWorld, et_wall);
 				e->setTexture(_pWorld->_textureHandler.getTexture(tt_wall));
+				myfile >> t;
+				float x = stof(t);
+				myfile >> t;
+				float y = stof(t);
+				e->setPosition(sf::Vector2f(x, y));
+				_entities.push_back(e);
 			}
 			//Plant
 			else if(t == "B")
 			{
 				e = new Entity(_pWorld, et_plant);
 				e->setTexture(_pWorld->_textureHandler.getTexture(tt_plant));
+				myfile >> t;
+				float x = stof(t);
+				myfile >> t;
+				float y = stof(t);
+				e->setPosition(sf::Vector2f(x, y));
+				_entities.push_back(e);
 			}
 			//Rabbit
 			else if(t == "C")
 			{
-				e = new EnemyRabbit(_pWorld);
-				e->setTexture(_pWorld->_textureHandler.getTexture(tt_rabbit));
+				Enemy* er = new EnemyRabbit(_pWorld);
+				er->setTexture(_pWorld->_textureHandler.getTexture(tt_rabbit));
+				myfile >> t;
+				float x = stof(t);
+				myfile >> t;
+				float y = stof(t);
+				er->setPosition(sf::Vector2f(x, y));
+				_enemies.push_back(er);
 			}
 			//Floor
 			else if(t == "D")
 			{
 				e = new Entity(_pWorld, et_floor);
 				e->setTexture(_pWorld->_textureHandler.getTexture(tt_floor));
+				myfile >> t;
+				float x = stof(t);
+				myfile >> t;
+				float y = stof(t);
+				e->setPosition(sf::Vector2f(x, y));
+				_entities.push_back(e);
 			}
 
-			myfile >> t;
-			float x = stof(t);
-			myfile >> t;
-			float y = stof(t);
 
-			e->setPosition(sf::Vector2f(x, y));
-			_entities.push_back(e);
 		}
 		myfile.close();
 	}

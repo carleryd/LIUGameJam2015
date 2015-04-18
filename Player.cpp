@@ -1,6 +1,7 @@
 #include "Player.h"
 #include "Utility.h"
 #include "World.h"
+#include "Enemy.h"
 #include <math.h>
 #include <iostream>
 using namespace std;
@@ -79,7 +80,7 @@ void Player::Update()
 	tempPosY.y += deltaSpeed.y;
     
     sf::Vector2f spawnPosition(500, 700);
-    for(Entity* e : _pWorld->_rabbits) {
+	for(Enemy* e : _pWorld->_level->_enemies) {
 		//Colission in X
 		if(Utility::SSCollision(tempPosX, getOrigin(), getSize(), e->getPosition(), e->getOrigin(), e->getSize()))
 		{
