@@ -1,4 +1,6 @@
 #include "Entity.h"
+#include "Light.h"
+#include <memory>
 
 class Player : public Entity
 {
@@ -13,6 +15,7 @@ private:
 	float _rotation;
 	float _speed;
 	float _maxSpeed;
+	std::unique_ptr<Light> _light;
 
 	//temp
 	sf::CircleShape* c;
