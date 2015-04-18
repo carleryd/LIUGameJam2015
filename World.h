@@ -1,6 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include "TextureHandler.h"
-#include <list>
+#include <vector>
 class Entity;
 class Player;
 
@@ -13,7 +13,7 @@ public:
 	void Draw();
 	
 	TextureHandler _textureHandler;
-	std::list<Entity*> Entitys;
+	std::vector<Entity*> Entitys;
 	Player* _pPlayer;
 	sf::RenderWindow* _pWindow;
 };

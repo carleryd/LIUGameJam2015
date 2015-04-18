@@ -79,33 +79,39 @@ void Player::Update()
 		//Colission in X
 		if(Utility::SSCollision(tempPosX, getOrigin(), getSize(), e->getPosition(), e->getOrigin(), e->getSize()))
 		{
-			if(deltaSpeed.x > 0)
+			if(e->_entityType == et_wall)
 			{
-				setPositionX(e->getPosition().x - e->getOrigin().x - getOrigin().x - 1);
+				if(deltaSpeed.x > 0)
+				{
+					setPositionX(e->getPosition().x - e->getOrigin().x - getOrigin().x - 1);
+				}
+				else
+				{
+					setPositionX(e->getPosition().x + e->getOrigin().x + e->getSize() + getOrigin().x + 1);
+				}
+				deltaSpeed.x = 0;
 			}
-			else
-			{
-				setPositionX(e->getPosition().x + e->getOrigin().x + e->getSize() + getOrigin().x + 1);
-			}
-			deltaSpeed.x = 0;
 		}
 		//Colission in Y
 		if(Utility::SSCollision(tempPosY, getOrigin(), getSize(), e->getPosition(), e->getOrigin(), e->getSize()))
 		{
-			if(deltaSpeed.y > 0)
+			if(e->_entityType == et_wall)
 			{
-				setPositionY(e->getPosition().y - e->getOrigin().y - getOrigin().y - 1);
+				if(deltaSpeed.y > 0)
+				{
+					setPositionY(e->getPosition().y - e->getOrigin().y - getOrigin().y - 1);
+				}
+				else
+				{
+					setPositionY(e->getPosition().y + e->getOrigin().y + e->getSize() + getOrigin().y + 1);
+				}
+				deltaSpeed.y = 0;
 			}
-			else
-			{
-				setPositionY(e->getPosition().y + e->getOrigin().y + e->getSize() + getOrigin().y + 1);
-			}
-			deltaSpeed.y = 0;
 		}
 	}
 
 	_sprite.move(deltaSpeed);
-	//tenp
+	//temp
 	Utility::vMul(direction, 50);
 	c->setPosition(_sprite.getPosition() + direction);
 }
