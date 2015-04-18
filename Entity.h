@@ -1,4 +1,6 @@
+#pragma once
 #include <SFML/Graphics.hpp>
+#include <list>
 class World;
 
 enum EntityType {et_moving, et_wall, et_floor};
@@ -6,11 +8,14 @@ enum EntityType {et_moving, et_wall, et_floor};
 class Entity
 {
 public:
+    Entity();
 	Entity(World* pWorld, EntityType entityType);
 	~Entity();
+    
 	virtual void Update();
 	virtual void Draw();
 	virtual void setTexture(sf::Texture* texture);
+    virtual void setAnimationTexture(sf::Texture* textures, int animationCount);
 	sf::Vector2f getPosition();
 	void setPosition(const sf::Vector2f position);
 	float getSize();
@@ -22,5 +27,7 @@ public:
 	World* _pWorld;
 protected:
 	sf::Sprite _sprite;
+    std::vector<sf::Sprite> _sprites;
 	float _size;
+    bool animation;
 };

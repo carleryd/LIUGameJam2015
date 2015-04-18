@@ -2,17 +2,21 @@
 #include "Utility.h"
 #include "World.h"
 #include <math.h>
+#include <iostream>
+using namespace std;
 
-#define Acceleration 0.1
-#define TurnSpeed 0.3
+#define Acceleration 0.8
+#define TurnSpeed 3
 
 
 Player::Player(World* pWorld) : Entity(pWorld, et_moving)
 {
-	setTexture(pWorld->_textureHandler.getTexture(tt_player));
+	setTexture(pWorld->_textureHandler.getTexture(tt_player_animation_4));
+//    setAnimationTexture(pWorld->_textureHandler.getTexture(tt_player_animation_4), 4);
+    setTexture(pWorld->_textureHandler.getTexture(tt_player_animation_4));
 	_rotation = 0;
 	_speed = 0;
-	_maxSpeed = 0.5;
+	_maxSpeed = 3;
 	_sprite.setOrigin(32, 32);
 
 	//temp
@@ -32,9 +36,13 @@ Player::~Player()
 
 void Player::Draw()
 {
-	_pWorld->_pWindow->draw(_sprite);
+    // animation stuff
+    int walk = _walkDuration % 40;
+    _sprite.setTextureRect(sf::IntRect((walk-1)/10*64, 0, 64, 64));
+    _pWorld->_pWindow->draw(_sprite);
+	
 
-	//temp
+	//temp? :)
 	_pWorld->_pWindow->draw(*c);
 	_light->draw();
 }
@@ -59,7 +67,8 @@ void Player::Update()
 	{
 		_rotation -= TurnSpeed;
 	}
-
+	if(_speed > 0.1) _walkDuration++;
+    if(_walkDuration > 4000000000) _walkDuration = 0;
 	_sprite.setRotation(_rotation);
 	_speed *= 0.8;
 
@@ -79,38 +88,44 @@ void Player::Update()
 	sf::Vector2f tempPosY = getPosition();
 	tempPosX.x += deltaSpeed.x;
 	tempPosY.y += deltaSpeed.y;
-	for(Entity* e : _pWorld->Entitys)
+	for(Entity* e : _pWorld->entities)
 	{
 		//Colission in X
 		if(Utility::SSCollision(tempPosX, getOrigin(), getSize(), e->getPosition(), e->getOrigin(), e->getSize()))
 		{
-			if(deltaSpeed.x > 0)
+			if(e->_entityType == et_wall)
 			{
-				setPositionX(e->getPosition().x - e->getOrigin().x - getOrigin().x - 1);
+				if(deltaSpeed.x > 0)
+				{
+					setPositionX(e->getPosition().x - e->getOrigin().x - getOrigin().x - 1);
+				}
+				else
+				{
+					setPositionX(e->getPosition().x + e->getOrigin().x + e->getSize() + getOrigin().x + 1);
+				}
+				deltaSpeed.x = 0;
 			}
-			else
-			{
-				setPositionX(e->getPosition().x + e->getOrigin().x + e->getSize() + getOrigin().x + 1);
-			}
-			deltaSpeed.x = 0;
 		}
 		//Colission in Y
 		if(Utility::SSCollision(tempPosY, getOrigin(), getSize(), e->getPosition(), e->getOrigin(), e->getSize()))
 		{
-			if(deltaSpeed.y > 0)
+			if(e->_entityType == et_wall)
 			{
-				setPositionY(e->getPosition().y - e->getOrigin().y - getOrigin().y - 1);
+				if(deltaSpeed.y > 0)
+				{
+					setPositionY(e->getPosition().y - e->getOrigin().y - getOrigin().y - 1);
+				}
+				else
+				{
+					setPositionY(e->getPosition().y + e->getOrigin().y + e->getSize() + getOrigin().y + 1);
+				}
+				deltaSpeed.y = 0;
 			}
-			else
-			{
-				setPositionY(e->getPosition().y + e->getOrigin().y + e->getSize() + getOrigin().y + 1);
-			}
-			deltaSpeed.y = 0;
 		}
 	}
 
 	_sprite.move(deltaSpeed);
-	//tenp
+	//temp
 	Utility::vMul(direction, 50);
 	c->setPosition(_sprite.getPosition() + direction);
 	_light->update(direction, r);

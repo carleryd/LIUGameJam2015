@@ -1,7 +1,13 @@
-//#include "Enemy.h"
+#include "Enemy.h"
+class World;
 
-class EnemyRabbit// : public Enemy
+class EnemyRabbit : public Enemy
 {
 public:
-    EnemyRabbit();
+    EnemyRabbit(World* pWorld);
+    void Update();
+
+private:
+    int _walkDuration;
+    float _speed;
 };
