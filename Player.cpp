@@ -9,7 +9,7 @@
 
 Player::Player(World* pWorld) : Entity(pWorld)
 {
-	setTexture(pWorld->getResourcePath() + "Textures/Player.png");
+	setTexture(pWorld->_textureHandler.getTexture(tt_player));
 	_rotation = 0;
 	_speed = 0;
 	_maxSpeed = 0.5;
@@ -63,7 +63,8 @@ void Player::Update()
 	if(_speed > _maxSpeed)
 		_speed = _maxSpeed;
 
-	sf::Vector2f direction(cos(Utility::DtoR(_rotation)), sin(Utility::DtoR(_rotation)));
+	float rotationRadian = Utility::DtoR(_rotation);
+	sf::Vector2f direction(cos(rotationRadian), sin(rotationRadian));
 	Utility::Normalize(direction);	
 	_sprite.move(direction.x * _speed, direction.y * _speed);
 

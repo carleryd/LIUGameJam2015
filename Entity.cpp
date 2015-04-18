@@ -27,13 +27,9 @@ void Entity::Draw()
 
 
 
-void Entity::setTexture(const std::string& filename, const sf::IntRect& area)
+void Entity::setTexture(sf::Texture* texture)
 {
-	if(!_texture.loadFromFile(filename, area))
-	{
-		//std::cout <<"failed to load texture " <<filename <<"\n";
-	}
-	_sprite.setTexture(_texture);
+	_sprite.setTexture(*texture);
 }
 
 
