@@ -19,6 +19,7 @@ Player::Player(World* pWorld) : Entity(pWorld)
 	c = new sf::CircleShape(6);
 	c->setOrigin(3, 3);
 	c->setFillColor(sf::Color::Black);
+	_light = unique_ptr<Light>(new Light(pWorld, this));
 }
 
 
@@ -34,6 +35,7 @@ void Player::Draw()
 
 	//temp
 	_pWorld->_pWindow->draw(*c);
+	_light->draw();
 }
 
 
