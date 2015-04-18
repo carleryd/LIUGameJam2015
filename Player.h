@@ -7,6 +7,7 @@ class Player : public Entity
 public:
 	Player(World* pWorld);
 	~Player();
+
 	void Update();
 	void Draw();
 	void setRotation(float Rotation);
@@ -20,6 +21,4 @@ private:
 	float _maxSpeed;
     unsigned long int _walkDuration;
 	std::unique_ptr<Light> _light;
-	//temp
-	sf::CircleShape* c;
 };

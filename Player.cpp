@@ -19,11 +19,6 @@ Player::Player(World* pWorld) : Entity(pWorld, et_moving)
 	_maxSpeed = 3;
 	_sprite.setOrigin(32, 32);
 
-	//temp
-	c = new sf::CircleShape(6);
-	c->setOrigin(3, 3);
-	c->setFillColor(sf::Color::Black);
-
 	_light = std::unique_ptr<Light>(new Light(pWorld, this));
 }
 
@@ -43,7 +38,6 @@ void Player::Draw()
 	
 
 	//temp? :)
-	_pWorld->_pWindow->draw(*c);
 	_light->draw();
 }
 
@@ -127,7 +121,6 @@ void Player::Update()
 	_sprite.move(deltaSpeed);
 	//temp
 	Utility::vMul(direction, 50);
-	c->setPosition(_sprite.getPosition() + direction);
 	_light->update(direction, r);
 }
 
