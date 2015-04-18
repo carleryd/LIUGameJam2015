@@ -92,11 +92,13 @@ void Player::Update()
 			{
 				if(deltaSpeed.x > 0)
 				{
-					setPositionX(e->getPosition().x - e->getOrigin().x - getOrigin().x - 1);
+					setPositionX(e->getPosition().x - e->getOrigin().x - getSize() - getOrigin().x - 1);
+					std::cout <<"RIGHT\n";
 				}
 				else
 				{
 					setPositionX(e->getPosition().x + e->getOrigin().x + e->getSize() + getOrigin().x + 1);
+					std::cout <<"LEFT \n";
 				}
 				deltaSpeed.x = 0;
 			}
@@ -108,7 +110,7 @@ void Player::Update()
 			{
 				if(deltaSpeed.y > 0)
 				{
-					setPositionY(e->getPosition().y - e->getOrigin().y - getOrigin().y - 1);
+					setPositionY(e->getPosition().y - e->getOrigin().y + getOrigin().y - getSize() - 1);
 				}
 				else
 				{
