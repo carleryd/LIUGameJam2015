@@ -12,11 +12,13 @@ public:
 	void setRotation(float Rotation);
 
 private:
+	void setPositionX(float x);
+	void setPositionY(float y);
+
 	float _rotation;
 	float _speed;
 	float _maxSpeed;
 	std::unique_ptr<Light> _light;
-
 	//temp
 	sf::CircleShape* c;
 };

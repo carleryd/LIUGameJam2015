@@ -7,9 +7,9 @@
 #define TurnSpeed 0.3
 
 
-Player::Player(World* pWorld) : Entity(pWorld)
+Player::Player(World* pWorld) : Entity(pWorld, et_moving)
 {
-	setTexture(pWorld->getResourcePath() + "Textures/Player.png");
+	setTexture(pWorld->_textureHandler.getTexture(tt_player));
 	_rotation = 0;
 	_speed = 0;
 	_maxSpeed = 0.5;
@@ -20,7 +20,7 @@ Player::Player(World* pWorld) : Entity(pWorld)
 	c->setOrigin(3, 3);
 	c->setFillColor(sf::Color::Black);
 
-	_light = unique_ptr<Light>(new Light(pWorld, this));
+	_light = std::unique_ptr<Light>(new Light(pWorld, this));
 }
 
 
@@ -70,13 +70,49 @@ void Player::Update()
 	sf::Vector2f direction(cos(Utility::DtoR(_rotation)), sin(Utility::DtoR(_rotation)));
 	Utility::Normalize(direction);	
 	_sprite.move(direction.x * _speed, direction.y * _speed);
-
 	
+	//_light->update(direction, r);
 
+
+	sf::Vector2f deltaSpeed(direction.x * _speed, direction.y * _speed);
+	sf::Vector2f tempPosX = getPosition();
+	sf::Vector2f tempPosY = getPosition();
+	tempPosX.x += deltaSpeed.x;
+	tempPosY.y += deltaSpeed.y;
+	for(Entity* e : _pWorld->Entitys)
+	{
+		//Colission in X
+		if(Utility::SSCollision(tempPosX, getOrigin(), getSize(), e->getPosition(), e->getOrigin(), e->getSize()))
+		{
+			if(deltaSpeed.x > 0)
+			{
+				setPositionX(e->getPosition().x - e->getOrigin().x - getOrigin().x - 1);
+			}
+			else
+			{
+				setPositionX(e->getPosition().x + e->getOrigin().x + e->getSize() + getOrigin().x + 1);
+			}
+			deltaSpeed.x = 0;
+		}
+		//Colission in Y
+		if(Utility::SSCollision(tempPosY, getOrigin(), getSize(), e->getPosition(), e->getOrigin(), e->getSize()))
+		{
+			if(deltaSpeed.y > 0)
+			{
+				setPositionY(e->getPosition().y - e->getOrigin().y - getOrigin().y - 1);
+			}
+			else
+			{
+				setPositionY(e->getPosition().y + e->getOrigin().y + e->getSize() + getOrigin().y + 1);
+			}
+			deltaSpeed.y = 0;
+		}
+	}
+
+	_sprite.move(deltaSpeed);
 	//tenp
 	Utility::vMul(direction, 50);
 	c->setPosition(_sprite.getPosition() + direction);
-
 	_light->update(direction, r);
 }
 
@@ -84,4 +120,16 @@ void Player::Update()
 void Player::setRotation(float Rotation)
 {
 	_sprite.setRotation(Rotation);
+}
+
+
+void Player::setPositionX(float x)
+{
+	_sprite.setPosition(x, _sprite.getPosition().y);
+}
+
+
+void Player::setPositionY(float y)
+{
+	_sprite.setPosition(_sprite.getPosition().x, y);
 }
