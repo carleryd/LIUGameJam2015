@@ -18,6 +18,8 @@ public:
     virtual void setAnimationTexture(sf::Texture* textures, int animationCount);
 	sf::Vector2f getPosition();
 	void setPosition(const sf::Vector2f position);
+	void setPositionX(float x);
+	void setPositionY(float y);
 	float getSize();
 	void setSize(const float size);
 	sf::Vector2f getOrigin();

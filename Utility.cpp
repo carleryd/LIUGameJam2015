@@ -33,6 +33,10 @@ float Utility::RtoD(const float& Radian)
 	return Radian * (180/PI);
 }
 
+float Utility::angle(const sf::Vector2f A, sf::Vector2f B) {
+    return atan2f(A.y - B.y,  A.x - B.x) * (180 / PI);
+}
+
 sf::Vector2f Utility::mul(sf::Vector2f& a, sf::Vector2f&b)
 {
 	return sf::Vector2f(a.x * b.x, a.y * b.y);

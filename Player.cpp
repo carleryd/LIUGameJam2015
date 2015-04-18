@@ -12,17 +12,11 @@ using namespace std;
 Player::Player(World* pWorld) : Entity(pWorld, et_moving)
 {
 	setTexture(pWorld->_textureHandler.getTexture(tt_player_animation_4));
-//    setAnimationTexture(pWorld->_textureHandler.getTexture(tt_player_animation_4), 4);
     setTexture(pWorld->_textureHandler.getTexture(tt_player_animation_4));
 	_rotation = 0;
 	_speed = 0;
 	_maxSpeed = 3;
 	_sprite.setOrigin(32, 32);
-
-	//temp
-	c = new sf::CircleShape(6);
-	c->setOrigin(3, 3);
-	c->setFillColor(sf::Color::Black);
 
 	_light = new Light(pWorld, this);
 }
@@ -30,7 +24,7 @@ Player::Player(World* pWorld) : Entity(pWorld, et_moving)
 
 Player::~Player()
 {
-
+	delete _light;
 }
 
 
@@ -43,7 +37,6 @@ void Player::Draw()
 	
 
 	//temp? :)
-	_pWorld->_pWindow->draw(*c);
 	_light->draw();
 }
 
@@ -94,12 +87,11 @@ void Player::Update()
 				if(deltaSpeed.x > 0)
 				{
 					setPositionX(e->getPosition().x - e->getOrigin().x - getSize() + getOrigin().x - 1);
-					std::cout <<e->getPosition().x <<" RIGHT\n";
+
 				}
-				else
+				else if(deltaSpeed.x < 0)
 				{
-					setPositionX(e->getPosition().x + e->getOrigin().x + e->getSize() + getOrigin().x + 1);
-					std::cout <<"LEFT \n";
+					setPositionX(e->getPosition().x - e->getOrigin().x + e->getSize() + getOrigin().x + 1);
 				}
 				deltaSpeed.x = 0;
 			}
@@ -113,9 +105,9 @@ void Player::Update()
 				{
 					setPositionY(e->getPosition().y - e->getOrigin().y  - getSize() + getOrigin().y - 1);
 				}
-				else
+				else if(deltaSpeed.y < 0)
 				{
-					setPositionY(e->getPosition().y + e->getOrigin().y + e->getSize() + getOrigin().y + 1);
+					setPositionY(e->getPosition().y - e->getOrigin().y + e->getSize() + getOrigin().y + 1);
 				}
 				deltaSpeed.y = 0;
 			}
@@ -125,24 +117,10 @@ void Player::Update()
 	_sprite.move(deltaSpeed);
 	//temp
 	Utility::vMul(direction, 50);
-	c->setPosition(_sprite.getPosition() + direction);
 	_light->update(direction, _rotation);
 }
-
 
 void Player::setRotation(float Rotation)
 {
 	_sprite.setRotation(Rotation);
-}
-
-
-void Player::setPositionX(float x)
-{
-	_sprite.setPosition(x, _sprite.getPosition().y);
-}
-
-
-void Player::setPositionY(float y)
-{
-	_sprite.setPosition(_sprite.getPosition().x, y);
 }

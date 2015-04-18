@@ -16,6 +16,7 @@ public:
 	~World();
 	void Update();
 	void Draw();
+    Player* getPlayer();
 	
 	TextureHandler _textureHandler;
 	Level* _level;
