@@ -17,6 +17,11 @@ World::World(sf::RenderWindow* pWindow)
 	e->setTexture(_textureHandler.getTexture(tt_wall));
     entities.push_back(e);
 
+	e = new Entity(this, et_wall);
+	e->setPosition(sf::Vector2f(600.0, 500.0));
+	e->setTexture(_textureHandler.getTexture(tt_wall));
+    entities.push_back(e);
+
     Entity* plant1 = new Entity(this, et_wall);
     Entity* plant2 = new Entity(this, et_wall);
     Entity* plant3 = new Entity(this, et_wall);

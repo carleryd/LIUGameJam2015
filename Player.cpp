@@ -20,6 +20,7 @@ Player::Player(World* pWorld) : Entity(pWorld, et_moving)
 	_sprite.setOrigin(32, 32);
 
 	_light = std::unique_ptr<Light>(new Light(pWorld, this));
+
 }
 
 
@@ -69,12 +70,8 @@ void Player::Update()
 	if(_speed > _maxSpeed)
 		_speed = _maxSpeed;
 
-	float r = _rotation;
 	sf::Vector2f direction(cos(Utility::DtoR(_rotation)), sin(Utility::DtoR(_rotation)));
 	Utility::Normalize(direction);	
-	_sprite.move(direction.x * _speed, direction.y * _speed);
-	
-	//_light->update(direction, r);
 
 
 	sf::Vector2f deltaSpeed(direction.x * _speed, direction.y * _speed);
@@ -91,11 +88,13 @@ void Player::Update()
 			{
 				if(deltaSpeed.x > 0)
 				{
-					setPositionX(e->getPosition().x - e->getOrigin().x - getOrigin().x - 1);
+					setPositionX(e->getPosition().x - e->getOrigin().x - getSize() + getOrigin().x - 1);
+					std::cout <<"RIGHT\n";
 				}
 				else
 				{
 					setPositionX(e->getPosition().x + e->getOrigin().x + e->getSize() + getOrigin().x + 1);
+					std::cout <<"LEFT \n";
 				}
 				deltaSpeed.x = 0;
 			}
@@ -107,7 +106,7 @@ void Player::Update()
 			{
 				if(deltaSpeed.y > 0)
 				{
-					setPositionY(e->getPosition().y - e->getOrigin().y - getOrigin().y - 1);
+					setPositionY(e->getPosition().y - e->getOrigin().y  - getSize() + getOrigin().y - 1);
 				}
 				else
 				{
@@ -121,7 +120,7 @@ void Player::Update()
 	_sprite.move(deltaSpeed);
 	//temp
 	Utility::vMul(direction, 50);
-	_light->update(direction, r);
+	_light->update(direction, _rotation);
 }
 
 

@@ -3,6 +3,7 @@
 #include "Player.h"
 #include "Utility.h"
 #include <iostream>
+#include <math.h>
 using namespace std;
 
 Light::Light(World* pWorld, Player* p):
@@ -12,7 +13,7 @@ _lightCone(sf::Triangles, 3) /*,_lightDetector(pWorld, et_moving)*/
 	_pPlayer = p;
 	_lightCone[0].position = p->getPosition(); //player
 	_lightCone[1].position = sf::Vector2f(10, 10); //left
-	_lightCone[2].position = sf::Vector2f(25, 500); //right
+	_lightCone[2].position = sf::Vector2f(25, 500); //right*/
 	sf::Color yellow(255,255,0, 150);
 	_lightCone[0].color = yellow;
 	_lightCone[1].color = yellow;
@@ -27,6 +28,7 @@ void Light::draw()
 void Light::update(sf::Vector2f direction, float rotation)
 {
 	_lightCone[0].position = _pPlayer->getPosition();
+	//_lightCone[0].position =sf::Vector2f(10.0, 10.0);
 	sf::Vector2f pp = _pPlayer->getPosition();
 	//_lightDetector.
 

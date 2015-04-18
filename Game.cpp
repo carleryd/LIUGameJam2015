@@ -3,7 +3,7 @@
 
 Game::Game()
 {
-	_pWindow = new sf::RenderWindow(sf::VideoMode(800, 600), "CAROTTEN BITTE!");
+	_pWindow = new sf::RenderWindow(sf::VideoMode(1224, 768), "CAROTTEN BITTE!");
     _pWindow->setFramerateLimit(100);
 	_pWorld = new World(_pWindow);
 	_GameState = Running;
