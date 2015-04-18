@@ -1,6 +1,6 @@
+//#include "Enemy.h"
 
-
-class EnemyRabbit : public Enemy
+class EnemyRabbit// : public Enemy
 {
 public:
     EnemyRabbit();

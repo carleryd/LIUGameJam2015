@@ -18,7 +18,7 @@ public:
 
 	World* _pWorld;
 protected:
-	sf::Texture _Texture;
-	sf::Sprite _Sprite;
+	sf::Texture _texture;
+	sf::Sprite _sprite;
     sf::Vector2f _pos, _size;
 };

@@ -13,7 +13,6 @@ World::World(sf::RenderWindow* pWindow)
         std::cout << "Not WIN32 or APPLE" << std::endl;
     #endif
     _resourcePath = osHandler->getResourcePath();
-    cout << "resourcePath: " <<  _resourcePath << endl;
     
 	_pWindow = pWindow;
 	Entity* e = new Entity(this);

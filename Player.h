@@ -10,9 +10,9 @@ public:
 	void setRotation(float Rotation);
 
 private:
-	float _Rotation;
-	float _Speed;
-	float _MaxSpeed;
+	float _rotation;
+	float _speed;
+	float _maxSpeed;
 
 	//temp
 	sf::CircleShape* c;

@@ -10,10 +10,10 @@
 Player::Player(World* pWorld) : Entity(pWorld)
 {
 	setTexture(pWorld->getResourcePath() + "Textures/Player.png");
-	_Rotation = 0;
-	_Speed = 0;
-	_MaxSpeed = 0.5;
-	_Sprite.setOrigin(32, 32);
+	_rotation = 0;
+	_speed = 0;
+	_maxSpeed = 0.5;
+	_sprite.setOrigin(32, 32);
 
 	//temp
 	c = new sf::CircleShape(6);
@@ -30,7 +30,7 @@ Player::~Player()
 
 void Player::Draw()
 {
-	_pWorld->_pWindow->draw(_Sprite);
+	_pWorld->_pWindow->draw(_sprite);
 
 	//temp
 	_pWorld->_pWindow->draw(*c);
@@ -41,39 +41,39 @@ void Player::Update()
 {
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 	{
-		_Speed += Acceleration;
+		_speed += Acceleration;
 	}
 	else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 	{
-		_Speed -= Acceleration;
+		_speed -= Acceleration;
 	}
 
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 	{
-		_Rotation += TurnSpeed;
+		_rotation += TurnSpeed;
 	}
 	else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 	{
-		_Rotation -= TurnSpeed;
+		_rotation -= TurnSpeed;
 	}
 
-	_Sprite.setRotation(_Rotation);
-	_Speed *= 0.8;
+	_sprite.setRotation(_rotation);
+	_speed *= 0.8;
 
-	if(_Speed > _MaxSpeed)
-		_Speed = _MaxSpeed;
+	if(_speed > _maxSpeed)
+		_speed = _maxSpeed;
 
-	sf::Vector2f direction(cos(Utility::DtoR(_Rotation)), sin(Utility::DtoR(_Rotation)));
+	sf::Vector2f direction(cos(Utility::DtoR(_rotation)), sin(Utility::DtoR(_rotation)));
 	Utility::Normalize(direction);	
-	_Sprite.move(direction.x * _Speed, direction.y * _Speed);
+	_sprite.move(direction.x * _speed, direction.y * _speed);
 
 	//tenp
 	Utility::vMul(direction, 50);
-	c->setPosition(_Sprite.getPosition() + direction);
+	c->setPosition(_sprite.getPosition() + direction);
 }
 
 
 void Player::setRotation(float Rotation)
 {
-	_Sprite.setRotation(Rotation);
+	_sprite.setRotation(Rotation);
 }
