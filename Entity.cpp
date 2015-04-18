@@ -7,6 +7,12 @@ Entity::Entity(World* pWorld)
 }
 
 
+Entity::~Entity()
+{
+
+}
+
+
 void Entity::Update()
 {
 

@@ -12,7 +12,7 @@ public:
 	virtual void setTexture(const std::string& filename, const sf::IntRect&	area=sf::IntRect());
 
 	World* _pWorld;
-private:
+protected:
 	sf::Texture _Texture;
 	sf::Sprite _Sprite;
 };
