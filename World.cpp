@@ -1,10 +1,10 @@
 #include "World.h"
-#include "EntityEmpty.h"
+#include "Entity.h"
 
 World::World(sf::RenderWindow* pWindow)
 {
 	_pWindow = pWindow;
-	EntityEmpty* e = new EntityEmpty(this);
+	Entity* e = new Entity(this);
 	e->setPosition(sf::Vector2f(300.0, 300.0));
 	//Vet inte var man ska sätta sökvägen
 	e->setTexture("Textures/test.png");
