@@ -19,7 +19,7 @@ private:
 	float _speed;
 	float _maxSpeed;
     unsigned long int _walkDuration;
-	std::unique_ptr<Light> _light;
+	Light* _light;
 	//temp
 	sf::CircleShape* c;
 };

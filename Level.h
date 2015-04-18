@@ -5,6 +5,8 @@
 class Level
 {
 public:
-	//static std::vector<Entity> load(const std::string filename);
-	//static void save(const std::string filename);
+	void load(const std::string filename);
+	void save(const std::string filename);
+
+	std::vector<Entity*> entities;
 };
