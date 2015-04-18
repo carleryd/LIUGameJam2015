@@ -8,6 +8,8 @@ public:
 	static void vMul(sf::Vector2f& v, const float f);
 	static float DtoR(const float& Degree);
 	static float RtoD(const float& Radian);
+	//Square to Square colission
+	static bool SSCollision(sf::Vector2f Aposition, sf::Vector2f Aorigin, float Awidth, sf::Vector2f Bposition, sf::Vector2f Borigin, float Bwidth);
 
 private:
 	Utility();

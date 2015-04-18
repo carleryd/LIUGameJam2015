@@ -24,6 +24,9 @@ TextureHandler::TextureHandler()
 	t = new sf::Texture();
 	t->loadFromFile(_resourcePath + "Textures/player.png");
 	_textures.push_back(std::make_pair(tt_player, t));
+	t = new sf::Texture();
+	t->loadFromFile(_resourcePath + "Textures/wall.png");
+	_textures.push_back(std::make_pair(tt_wall, t));
 }
 
 

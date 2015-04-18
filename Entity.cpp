@@ -1,10 +1,11 @@
 #include "Entity.h"
 #include "World.h"
 
-Entity::Entity(World* pWorld)
+Entity::Entity(World* pWorld, EntityType entityType)
 {
 	_pWorld = pWorld;
 	_size = 64.0;
+	_entityType = entityType;
 }
 
 
@@ -54,4 +55,16 @@ float Entity::getSize()
 void Entity::setSize(float size)
 {
 	_size = size;
+}
+
+
+sf::Vector2f Entity::getOrigin()
+{
+	return _sprite.getOrigin();
+}
+
+
+void Entity::setOrigin(sf::Vector2f origin)
+{
+	_sprite.setOrigin(origin);
 }

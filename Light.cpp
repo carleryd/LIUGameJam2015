@@ -17,5 +17,5 @@ _lightCone(sf::Triangles, 3)
 
 void Light::draw()
 {
-	_pWorld->_pWindow->draw(_lightCone);
+	//_pWorld->_pWindow->draw(_lightCone);
 }

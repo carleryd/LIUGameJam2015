@@ -2,7 +2,7 @@
 #include <list>
 #include <utility>
 
-enum TextureType {tt_test, tt_player};
+enum TextureType {tt_test, tt_player, tt_wall};
 
 class TextureHandler
 {
