@@ -8,19 +8,26 @@ World::World(sf::RenderWindow* pWindow)
 	_pWindow = pWindow;
     
 	Entity* e = new Entity(this, et_wall);
-	e->setTexture(_textureHandler.getTexture(tt_wall));
-	e->setPosition(sf::Vector2f(300.0, 300.0));
-	entities.push_back(e);
-    
-	e = new Entity(this, et_wall);
-	e->setPosition(sf::Vector2f(364.0, 364.0));
-	e->setTexture(_textureHandler.getTexture(tt_wall));
-    entities.push_back(e);
+//	e->setTexture(_textureHandler.getTexture(tt_wall));
+//	e->setPosition(sf::Vector2f(300.0, 300.0));
+//	entities.push_back(e);
+//    
+//	e = new Entity(this, et_wall);
+//	e->setPosition(sf::Vector2f(364.0, 364.0));
+//	e->setTexture(_textureHandler.getTexture(tt_wall));
+//    entities.push_back(e);
 
 	e = new Entity(this, et_wall);
 	e->setPosition(sf::Vector2f(600.0, 500.0));
 	e->setTexture(_textureHandler.getTexture(tt_wall));
     entities.push_back(e);
+    
+    for(int i = 0; i < 10; i++) {
+        e = new Entity(this, et_wall);
+        e->setPosition(sf::Vector2f(200.0+i*64, 300.0));
+        e->setTexture(_textureHandler.getTexture(tt_wall));
+        entities.push_back(e);
+    }
 
     Entity* plant1 = new Entity(this, et_wall);
     Entity* plant2 = new Entity(this, et_wall);

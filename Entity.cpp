@@ -8,6 +8,7 @@ Entity::Entity(World* pWorld, EntityType entityType)
 	_pWorld = pWorld;
 	_size = 64.0;
 	_entityType = entityType;
+    _sprite.setOrigin(sf::Vector2f(_size/2, _size/2));
 }
 
 
