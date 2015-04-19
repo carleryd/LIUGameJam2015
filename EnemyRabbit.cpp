@@ -58,34 +58,37 @@ void EnemyRabbit::collisionHandling() {
 	tempPosY.y += deltaSpeed.y;
     
     int short spacing = 2;
-    for(Entity* e : _pWorld->_level->_entities)
+    for(Entity* e : _pWorld->_pLevel->_entities)
 	{
-		//Colission in X
-		if(Utility::SSCollision(tempPosX, getOrigin(), getSize(), e->getPosition(), e->getOrigin(), e->getSize()))
+		if(e != nullptr)
 		{
-			if(e->_entityType == et_wall)
+			//Colission in X
+			if(Utility::SSCollision(tempPosX, getOrigin(), getSize(), e->getPosition(), e->getOrigin(), e->getSize()))
 			{
-				if(deltaSpeed.x > 0) {
-					setPositionX(e->getPosition().x - e->getOrigin().x - getSize() + getOrigin().x - spacing);
+				if(e->_entityType == et_wall)
+				{
+					if(deltaSpeed.x > 0) {
+						setPositionX(e->getPosition().x - e->getOrigin().x - getSize() + getOrigin().x - spacing);
+					}
+					else if(deltaSpeed.x < 0) {
+						setPositionX(e->getPosition().x - e->getOrigin().x + e->getSize() + getOrigin().x + spacing);
+					}
+					deltaSpeed.x = 0;
 				}
-				else if(deltaSpeed.x < 0) {
-					setPositionX(e->getPosition().x - e->getOrigin().x + e->getSize() + getOrigin().x + spacing);
-				}
-				deltaSpeed.x = 0;
 			}
-		}
-		//Colission in Y
-		if(Utility::SSCollision(tempPosY, getOrigin(), getSize(), e->getPosition(), e->getOrigin(), e->getSize()))
-		{
-			if(e->_entityType == et_wall)
+			//Colission in Y
+			if(Utility::SSCollision(tempPosY, getOrigin(), getSize(), e->getPosition(), e->getOrigin(), e->getSize()))
 			{
-				if(deltaSpeed.y > 0) {
-					setPositionY(e->getPosition().y - e->getOrigin().y  - getSize() + getOrigin().y - spacing);
+				if(e->_entityType == et_wall)
+				{
+					if(deltaSpeed.y > 0) {
+						setPositionY(e->getPosition().y - e->getOrigin().y  - getSize() + getOrigin().y - spacing);
+					}
+					else if(deltaSpeed.y < 0) {
+						setPositionY(e->getPosition().y - e->getOrigin().y + e->getSize() + getOrigin().y + spacing);
+					}
+					deltaSpeed.y = 0;
 				}
-				else if(deltaSpeed.y < 0) {
-					setPositionY(e->getPosition().y - e->getOrigin().y + e->getSize() + getOrigin().y + spacing);
-				}
-				deltaSpeed.y = 0;
 			}
 		}
 	}

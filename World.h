@@ -19,9 +19,12 @@ public:
     Player* getPlayer();
 	
 	TextureHandler _textureHandler;
-	Level* _level;
+	Level* _pLevel;
 	std::list<Entity*> _entities;
     std::list<Entity*> _rabbits;
 	Player* _pPlayer;
 	sf::RenderWindow* _pWindow;
+
+private:
+	bool _editorMode;
 };

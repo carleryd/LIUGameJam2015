@@ -11,9 +11,14 @@ public:
 	~Level();
 	void load(const std::string filename);
 	void save(const std::string filename);
+	void initEditorMode(int xSize, int ySize, const std::string levelName);
+	void editorModeUpdate();
 
 	std::vector<Entity*> _entities;
 	std::vector<Enemy*> _enemies;
 	World* _pWorld; 
-	float gridSize;
+	int gridSize;
+	int _xSize;
+	int _ySize;
+	std::string _levelName;
 };

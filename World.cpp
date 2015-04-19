@@ -7,12 +7,16 @@ World::World(sf::RenderWindow* pWindow)
 {
 	_pWindow = pWindow;
     
-	_level = new Level(this);
-
-
+	_pLevel = new Level(this);
 	_pPlayer = new Player(this);
-	_pPlayer->setPosition(sf::Vector2f(200.0, 200.0));
-	_level->load(_textureHandler.getResourcePath() + "Levels/1.lvl");
+	_pPlayer->setPosition(sf::Vector2f(64.0 * 10.0 + 32.0, 64.0 * 10.0 + 31.0));
+
+	//DONT FORGET TO CHANGE LEVELNAME IN initEditorMode!
+	_editorMode = false;
+	if(_editorMode)
+		_pLevel->initEditorMode(20, 15,_textureHandler.getResourcePath() + "Levels/1.lvl");
+	else
+		_pLevel->load(_textureHandler.getResourcePath() + "Levels/1.lvl");
 
 }
 
@@ -26,23 +30,30 @@ void World::Update()
 {
 	_pPlayer->Update();
 
-	for(Entity* e :_level->_entities) {
-        e->Update();
+	for(Entity* e :_pLevel->_entities) 
+	{
+		if(e != nullptr)
+			e->Update();
     }
-	for(Enemy* e : _level->_enemies)
+	for(Enemy* e : _pLevel->_enemies)
 	{
 		e->Update();
 	}
+
+	if(_editorMode)
+		_pLevel->editorModeUpdate();
 }
 
 void World::Draw()
 {
 	_pWindow->clear(sf::Color::White);
     
-    for(Entity* e : _level->_entities) {
-		e->Draw();
+    for(Entity* e : _pLevel->_entities)
+	{
+		if(e != nullptr)
+			e->Draw();
 	}
-	for(Enemy* e : _level->_enemies)
+	for(Enemy* e : _pLevel->_enemies)
 	{
 		e->Draw();
 	}

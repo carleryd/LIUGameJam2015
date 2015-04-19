@@ -80,7 +80,7 @@ void Player::Update()
 	tempPosY.y += deltaSpeed.y;
     
     sf::Vector2f spawnPosition(500, 700);
-	for(Enemy* e : _pWorld->_level->_enemies) {
+	for(Enemy* e : _pWorld->_pLevel->_enemies) {
 		//Colission in X
 		if(Utility::SSCollision(tempPosX, getOrigin(), getSize(), e->getPosition(), e->getOrigin(), e->getSize()))
 		{
@@ -108,39 +108,42 @@ void Player::Update()
             deltaSpeed.y = 0;
         }
     }
-	for(Entity* e : _pWorld->_level->_entities)
+	for(Entity* e : _pWorld->_pLevel->_entities)
 	{
-		//Colission in X
-		if(Utility::SSCollision(tempPosX, getOrigin(), getSize(), e->getPosition(), e->getOrigin(), e->getSize()))
+		if(e != nullptr)
 		{
-			if(e->_entityType == et_wall)
+			//Colission in X
+			if(Utility::SSCollision(tempPosX, getOrigin(), getSize(), e->getPosition(), e->getOrigin(), e->getSize()))
 			{
-				if(deltaSpeed.x > 0)
+				if(e->_entityType == et_wall)
 				{
-					setPositionX(e->getPosition().x - e->getOrigin().x - getSize() + getOrigin().x - 1);
+					if(deltaSpeed.x > 0)
+					{
+						setPositionX(e->getPosition().x - e->getOrigin().x - getSize() + getOrigin().x - 1);
 
+					}
+					else if(deltaSpeed.x < 0)
+					{
+						setPositionX(e->getPosition().x - e->getOrigin().x + e->getSize() + getOrigin().x + 1);
+					}
+					deltaSpeed.x = 0;
 				}
-				else if(deltaSpeed.x < 0)
-				{
-					setPositionX(e->getPosition().x - e->getOrigin().x + e->getSize() + getOrigin().x + 1);
-				}
-				deltaSpeed.x = 0;
 			}
-		}
-		//Colission in Y
-		if(Utility::SSCollision(tempPosY, getOrigin(), getSize(), e->getPosition(), e->getOrigin(), e->getSize()))
-		{
-			if(e->_entityType == et_wall)
+			//Colission in Y
+			if(Utility::SSCollision(tempPosY, getOrigin(), getSize(), e->getPosition(), e->getOrigin(), e->getSize()))
 			{
-				if(deltaSpeed.y > 0)
+				if(e->_entityType == et_wall)
 				{
-					setPositionY(e->getPosition().y - e->getOrigin().y  - getSize() + getOrigin().y - 1);
+					if(deltaSpeed.y > 0)
+					{
+						setPositionY(e->getPosition().y - e->getOrigin().y  - getSize() + getOrigin().y - 1);
+					}
+					else if(deltaSpeed.y < 0)
+					{
+						setPositionY(e->getPosition().y - e->getOrigin().y + e->getSize() + getOrigin().y + 1);
+					}
+					deltaSpeed.y = 0;
 				}
-				else if(deltaSpeed.y < 0)
-				{
-					setPositionY(e->getPosition().y - e->getOrigin().y + e->getSize() + getOrigin().y + 1);
-				}
-				deltaSpeed.y = 0;
 			}
 		}
 	}
