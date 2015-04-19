@@ -73,5 +73,5 @@ void World::Draw()
         rabbit->Update();
     }
 	_pPlayer->Draw();
-    _pWindow->display();
+	_pWindow->display();
 }

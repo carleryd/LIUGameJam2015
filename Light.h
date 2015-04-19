@@ -11,12 +11,22 @@ public:
 	~Light(){};
 	void draw();
 	void update(sf::Vector2f v, float rotation);
+	sf::VertexArray& getVertexArray() const;
+
 private:
+
 	sf::Vector2f _left;
 	sf::Vector2f _right;
 	Player* _pPlayer;
 	sf::VertexArray _lightCone;
+	sf::ConvexShape _leftShade;
+	sf::ConvexShape _rightShade;
+	sf::ConvexShape _topShade;
 	World* _pWorld;
+	//Entity _lightDetector;
+	sf::Vector2f getClosestCorner(sf::Vector2f);
+public:
+	bool inTriangle(sf::Vector2f p);
 };
 
 #endif

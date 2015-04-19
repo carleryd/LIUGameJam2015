@@ -55,3 +55,8 @@ bool Utility::SSCollision(sf::Vector2f Aposition, sf::Vector2f Aorigin, float Aw
 			Atop > Bbottom ||
 			Abottom < Btop);
 }
+
+float Utility::magnitude(sf::Vector2f a)
+{
+	return sqrt(pow(a.x,2) + pow(a.y,2));
+}

@@ -21,4 +21,5 @@ public:
     std::list<Enemy*> rabbits;
 	Player* _pPlayer;
 	sf::RenderWindow* _pWindow;
+	
 };
