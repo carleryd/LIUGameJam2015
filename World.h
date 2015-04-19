@@ -1,13 +1,15 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "TextureHandler.h"
 #include <vector>
 #include <iostream>
 #include "Level.h"
+#include <list>
 
 class Player;
 class Entity;
 class Enemy;
+class Textor;
+class TextureHandler;
 
 class World
 {
@@ -19,12 +21,14 @@ public:
     Player* getPlayer();
 	void restart();
 	
-	TextureHandler _textureHandler;
+	TextureHandler* _pTextureHandler;
 	Level* _pLevel;
 	std::list<Entity*> _entities;
-    std::list<Entity*> _rabbits;
+//    std::list<Entity*> _rabbits;
 	Player* _pPlayer;
 	sf::RenderWindow* _pWindow;
+    Textor* _pTextor;
+    int _gameDuration;
 	bool _editorMode;
 private:
 	

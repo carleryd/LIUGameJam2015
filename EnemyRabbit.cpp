@@ -14,6 +14,7 @@ void EnemyRabbit::Update() {
 	if(/*aggro() || */_inLight) {
         _rotation = Utility::angle(_pWorld->_pPlayer->getPosition(), getPosition()) - 90;
         _speed = 1.0;
+        _walkDuration = 0;
     }
     else {
         _speed = 0.5;
