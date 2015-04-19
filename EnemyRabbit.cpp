@@ -8,12 +8,13 @@
 EnemyRabbit::EnemyRabbit(World* pWorld) : Enemy(pWorld, et_rabbit) {
 	_speed = 0.5;
     _rotation = -90;
+    _drawWalkDuration = 0;
 }
 
 void EnemyRabbit::Update() {
 	if(/*aggro() || */_inLight) {
         _rotation = Utility::angle(_pWorld->_pPlayer->getPosition(), getPosition()) - 90;
-        _speed = 1.0;
+        _speed = 3.0;
         _walkDuration = 0;
     }
     else {
@@ -35,19 +36,29 @@ void EnemyRabbit::Update() {
     _sprite.move(directionVector * _speed);
 }
 
+void EnemyRabbit::Draw() {
+    _drawWalkDuration++;
+    // animation stuff
+    int walk = _drawWalkDuration % 40;
+    _sprite.setTextureRect(sf::IntRect((walk-1)/10*64, 0, 64, 64));
+    _pWorld->_pWindow->draw(_sprite);
+    if(_drawWalkDuration > 40000000) _drawWalkDuration = 0;
+
+}
+
 void EnemyRabbit::setInLight(bool inLight) {
     _inLight = inLight;
 }
 
-bool EnemyRabbit::aggro() {
-    sf::Vector2f diff = _pWorld->_pPlayer->getPosition() - getPosition();
-    float length = fabs(sqrt(pow(diff.x, 2) + pow(diff.y, 2)));
-    
-    if(length < 200) {
-        return true;
-    }
-    return false;
-}
+//bool EnemyRabbit::aggro() {
+//    sf::Vector2f diff = _pWorld->_pPlayer->getPosition() - getPosition();
+//    float length = fabs(sqrt(pow(diff.x, 2) + pow(diff.y, 2)));
+//    
+//    if(length < 200) {
+//        return true;
+//    }
+//    return false;
+//}
 
 void EnemyRabbit::collisionHandling() {
     _sprite.setRotation(_rotation);
