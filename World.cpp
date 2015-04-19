@@ -20,7 +20,7 @@ World::World(sf::RenderWindow* pWindow, unsigned int resolutionX, unsigned int r
 	_pPlayer->setPosition(sf::Vector2f(64.0 * 10.0 + 32.0, 64.0 * 10.0 + 31.0));
 
 	//DONT FORGET TO CHANGE LEVELNAME IN initEditorMode!
-	_editorMode = true;
+	_editorMode = false;
 	if(_editorMode)
 		_pLevel->initEditorMode(20, 15,_pTextureHandler->getResourcePath() + "Levels/1.lvl");
 	else

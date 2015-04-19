@@ -7,7 +7,8 @@ public:
 	EnemyRabbit(World* pWorld);
     ~EnemyRabbit();
     void Update();
-    bool aggro();
+    void Draw();
+//    bool aggro();
     void collisionHandling();
     void setInLight(bool inLight);
 
@@ -16,4 +17,5 @@ private:
     bool _inLight;
     float _speed;
     float _rotation;
+    unsigned long int _drawWalkDuration;
 };

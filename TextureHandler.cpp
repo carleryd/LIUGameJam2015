@@ -35,7 +35,7 @@ TextureHandler::TextureHandler()
 	_textures.push_back(std::make_pair(tt_grater, t));
     
     t = new sf::Texture();
-	t->loadFromFile(_resourcePath + "Textures/placeholder_rabbit.png");
+	t->loadFromFile(_resourcePath + "Textures/rabbit_animation_4.png");
 	_textures.push_back(std::make_pair(tt_rabbit, t));
     
     t = new sf::Texture();
@@ -43,7 +43,7 @@ TextureHandler::TextureHandler()
 	_textures.push_back(std::make_pair(tt_plant, t));
 
 	t = new sf::Texture();
-	t->loadFromFile(_resourcePath + "Textures/placeholder_floor.png");
+	t->loadFromFile(_resourcePath + "Textures/floor.png");
 	_textures.push_back(std::make_pair(tt_floor, t));
 
 	t = new sf::Texture();
