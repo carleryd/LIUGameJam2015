@@ -11,7 +11,7 @@ public:
 	~Light(){};
 	void draw();
 	void update(sf::Vector2f v, float rotation);
-	sf::VertexArray& getVertexArray() const;
+	sf::VertexArray& getVertexArray();
 
 private:
 

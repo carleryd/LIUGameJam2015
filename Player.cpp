@@ -1,7 +1,7 @@
 #include "Player.h"
 #include "Utility.h"
 #include "World.h"
-#include "Enemy.h"
+#include "EnemyRabbit.h"
 #include <math.h>
 #include <iostream>
 using namespace std;
@@ -81,6 +81,21 @@ void Player::Update()
     sf::Vector2f spawnPosition(500, 700);
 	for(Enemy* e : _pWorld->_pLevel->_enemies) {
 		//Colission in X
+        float angleLightA, angleLightB, angleToEnemy;
+        angleToEnemy = Utility::angleComplete(e->getPosition(), getPosition());
+        angleLightA = Utility::angleComplete(_light->getVertexArray()[1].position, getPosition());
+        angleLightB = Utility::angleComplete(_light->getVertexArray()[2].position, getPosition());
+        cout << "A: " << angleLightA << " B: " << angleLightB << " Enemy: " << angleToEnemy << endl;
+        EnemyRabbit* rabbit = dynamic_cast<EnemyRabbit*>(e);
+        if(angleLightA < angleToEnemy && angleToEnemy < angleLightB) {
+            rabbit->setInLight(true);
+            cout << "IN LIGHT" << endl;
+        }
+        else {
+            cout << "OUT LIGHT" << endl;
+            rabbit->setInLight(false);
+        }
+        
 		if(Utility::SSCollision(tempPosX, getOrigin(), getSize(), e->getPosition(), e->getOrigin(), e->getSize()))
 		{
             if(deltaSpeed.x > 0)

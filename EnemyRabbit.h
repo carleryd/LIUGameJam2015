@@ -8,9 +8,11 @@ public:
     void Update();
     bool aggro();
     void collisionHandling();
+    void setInLight(bool inLight);
 
 private:
     int _walkDuration;
+    bool _inLight;
     float _speed;
     float _rotation;
 };

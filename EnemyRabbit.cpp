@@ -11,7 +11,7 @@ EnemyRabbit::EnemyRabbit(World* pWorld) : Enemy(pWorld, et_rabbit) {
 }
 
 void EnemyRabbit::Update() {
-	if(aggro()) {
+	if(/*aggro() || */_inLight) {
         _rotation = Utility::angle(_pWorld->_pPlayer->getPosition(), getPosition()) - 90;
         _speed = 1.0;
     }
@@ -32,6 +32,10 @@ void EnemyRabbit::Update() {
     sf::Vector2f directionVector(cos(Utility::DtoR(_rotation+90)), sin(Utility::DtoR(_rotation+90)));
     Utility::Normalize(directionVector);
     _sprite.move(directionVector * _speed);
+}
+
+void EnemyRabbit::setInLight(bool inLight) {
+    _inLight = inLight;
 }
 
 bool EnemyRabbit::aggro() {

@@ -37,6 +37,13 @@ float Utility::angle(const sf::Vector2f A, sf::Vector2f B) {
     return atan2f(A.y - B.y,  A.x - B.x) * (180 / PI);
 }
 
+float Utility::angleComplete(sf::Vector2f A, sf::Vector2f B) { // between 360 - 720
+    float angle = atan2f(A.y - B.y,  A.x - B.x) * (180 / PI);
+    if(angle < 0) angle = 360 + angle;
+    
+    return angle + 360;
+}
+
 sf::Vector2f Utility::mul(sf::Vector2f& a, sf::Vector2f&b)
 {
 	return sf::Vector2f(a.x * b.x, a.y * b.y);

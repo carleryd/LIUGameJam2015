@@ -29,6 +29,10 @@ void Light::draw()
 //	_pWorld->_pWindow->draw(_topShade);
 }
 
+sf::VertexArray& Light::getVertexArray() {
+    return _lightCone;
+}
+
 void Light::update(sf::Vector2f direction, float rotation)
 {
 	_lightCone[0].position = _pPlayer->getPosition();
