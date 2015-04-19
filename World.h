@@ -32,8 +32,14 @@ public:
 	sf::RenderWindow* _pWindow;
 	sf::Shader _mainShader;
     Textor* _pTextor;
+    
+    
+    sf::Clock _clock;
+    sf::Time _elapsed;
+    
     int _gameDuration;
 	bool _editorMode;
+    bool _restart;
 
 	unsigned int _resolutionX;
 	unsigned int _resolutionY;

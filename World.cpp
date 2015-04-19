@@ -19,6 +19,7 @@ World::World(sf::RenderWindow* pWindow, unsigned int resolutionX, unsigned int r
 	_pLevel = new Level(this);
 	_pPlayer = new Player(this);
 	_pPlayer->setPosition(sf::Vector2f(64.0 * 10.0 + 32.0, 64.0 * 10.0 + 31.0));
+    _restart = false;
 
 	//DONT FORGET TO CHANGE LEVELNAME IN initEditorMode!
 	_editorMode = false;
@@ -29,7 +30,8 @@ World::World(sf::RenderWindow* pWindow, unsigned int resolutionX, unsigned int r
 		/*_buffer = new sf::SoundBuffer();
 		_sound = new sf::Sound();
 		_buffer.loadFromFile(getResourcePath() + "apple_bite.wav");
-		_sound.setBuffer(_buffer);*/
+         _sound.setBuffer(_buffer);*/
+    _clock.restart();
 }
 
 
@@ -40,8 +42,9 @@ World::~World()
 void World::restart() {
     _gameDuration = 0;
     _pTextor->writeTemporaryText("You have to be more careful!",
-                                 sf::Vector2f(200, 200), 70, sf::Color::Black, 1);
-    while(_gameDuration < 100) {
+                                 _pPlayer->getPosition() + sf::Vector2f(0, -200), 70, sf::Color::White, 1);
+	
+    while(_gameDuration < 1000) {
         _gameDuration++;
     }
     
@@ -57,28 +60,29 @@ void World::restart() {
 	_pPlayer->setPosition(sf::Vector2f(64.0 * 10.0 + 32.0, 64.0 * 10.0 + 31.0));
 	_pLevel->load(_pTextureHandler->getResourcePath() + "Levels/1.lvl");
 	//_sound.play();
+    _clock.restart();
+    _restart = true;
 }
 
 
 void World::Update()
 {
+    _elapsed = _clock.getElapsedTime();
 	_pPlayer->Update();
 
-	for(Entity* e :_pLevel->_entities) 
-	{
-		if(e != nullptr)
-			e->Update();
+    for(Entity* e :_pLevel->_entities)
+    {
+        if(e != nullptr)
+            e->Update();
     }
-	for(Enemy* e : _pLevel->_enemies)
-	{
-		if(!_editorMode)
-			e->Update();
-	}
+    for(Enemy* e : _pLevel->_enemies)
+    {
+        if(!_editorMode)
+            e->Update();
+    }
 
-	if(_editorMode)
-		_pLevel->editorModeUpdate();
-
-
+    if(_editorMode)
+        _pLevel->editorModeUpdate();
 }
 
 void World::Draw()
