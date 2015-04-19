@@ -24,9 +24,7 @@ private:
 	sf::ConvexShape _topShade;
 	World* _pWorld;
 	//Entity _lightDetector;
-	sf::Vector2f getClosestCorner(sf::Vector2f);
 public:
-	bool inTriangle(sf::Vector2f p);
 };
 
 #endif

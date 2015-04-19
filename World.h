@@ -25,6 +25,7 @@ public:
     std::list<Entity*> _rabbits;
 	Player* _pPlayer;
 	sf::RenderWindow* _pWindow;
-private:
 	bool _editorMode;
+private:
+	
 };

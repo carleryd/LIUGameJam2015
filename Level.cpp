@@ -39,6 +39,7 @@ void Level::load(const std::string filename)
 				myfile >> t;
 				float y = stof(t);
 				e->setPosition(sf::Vector2f(x, y));
+
 				_entities.push_back(e);
 			}
 			//Plant
@@ -93,14 +94,14 @@ void Level::load(const std::string filename)
             //Grater
 			else if(t == "F")
 			{
-				Enemy* er = new EnemyGrater(_pWorld);
-				er->setTexture(_pWorld->_textureHandler.getTexture(tt_grater_animation_4));
+				e = new EnemyGrater(_pWorld);
+				e->setTexture(_pWorld->_textureHandler.getTexture(tt_grater));
 				myfile >> t;
 				float x = stof(t);
 				myfile >> t;
 				float y = stof(t);
-				er->setPosition(sf::Vector2f(x, y));
-				_enemies.push_back(er);
+				e->setPosition(sf::Vector2f(x, y));
+				_entities.push_back(e);
 			}
 		}
 		myfile.close();
@@ -191,6 +192,13 @@ void Level::editorModeUpdate()
 		_entities[xIndex + yIndex * _xSize] = e;
 	}
 	else if(sf::Keyboard::isKeyPressed(sf::Keyboard::T))
+	{
+		e = new EnemyGrater(_pWorld);
+		e->setTexture(_pWorld->_textureHandler.getTexture(tt_grater));
+		e->setPosition(sf::Vector2f(xIndex * gridSize + 32.0, yIndex * gridSize + 32.0));
+		_entities[xIndex + yIndex * _xSize] = e;
+	}
+	else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Y))
 	{
 		_entities[xIndex + yIndex * _xSize] = nullptr;
 	}
