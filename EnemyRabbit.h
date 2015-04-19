@@ -5,6 +5,7 @@ class EnemyRabbit : public Enemy
 {
 public:
 	EnemyRabbit(World* pWorld);
+    ~EnemyRabbit();
     void Update();
     bool aggro();
     void collisionHandling();

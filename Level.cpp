@@ -3,6 +3,7 @@
 #include "EnemyRabbit.h"
 #include "EnemyGrater.h"
 #include "World.h"
+#include "TextureHandler.h"
 
 using namespace std;
 
@@ -33,7 +34,7 @@ void Level::load(const std::string filename)
 			if(t == "A")
 			{
 				e = new Entity(_pWorld, et_wall);
-				e->setTexture(_pWorld->_textureHandler.getTexture(tt_wall));
+				e->setTexture(_pWorld->_pTextureHandler->getTexture(tt_wall));
 				myfile >> t;
 				float x = stof(t);
 				myfile >> t;
@@ -46,7 +47,7 @@ void Level::load(const std::string filename)
 			else if(t == "B")
 			{
 				e = new Entity(_pWorld, et_plant);
-				e->setTexture(_pWorld->_textureHandler.getTexture(tt_plant));
+				e->setTexture(_pWorld->_pTextureHandler->getTexture(tt_plant));
 				myfile >> t;
 				float x = stof(t);
 				myfile >> t;
@@ -58,7 +59,7 @@ void Level::load(const std::string filename)
 			else if(t == "C")
 			{
 				Enemy* er = new EnemyRabbit(_pWorld);
-				er->setTexture(_pWorld->_textureHandler.getTexture(tt_rabbit));
+				er->setTexture(_pWorld->_pTextureHandler->getTexture(tt_rabbit));
 				myfile >> t;
 				float x = stof(t);
 				myfile >> t;
@@ -70,7 +71,7 @@ void Level::load(const std::string filename)
 			else if(t == "D")
 			{
 				e = new Entity(_pWorld, et_floor);
-				e->setTexture(_pWorld->_textureHandler.getTexture(tt_floor));
+				e->setTexture(_pWorld->_pTextureHandler->getTexture(tt_floor));
 				myfile >> t;
 				float x = stof(t);
 				myfile >> t;
@@ -83,7 +84,7 @@ void Level::load(const std::string filename)
 			else if(t == "E")
 			{
 				e = new Entity(_pWorld, et_grass);
-				e->setTexture(_pWorld->_textureHandler.getTexture(tt_grass));
+				e->setTexture(_pWorld->_pTextureHandler->getTexture(tt_grass));
 				myfile >> t;
 				float x = stof(t);
 				myfile >> t;
@@ -95,7 +96,7 @@ void Level::load(const std::string filename)
 			else if(t == "F")
 			{
 				e = new EnemyGrater(_pWorld);
-				e->setTexture(_pWorld->_textureHandler.getTexture(tt_grater));
+				e->setTexture(_pWorld->_pTextureHandler->getTexture(tt_grater));
 				myfile >> t;
 				float x = stof(t);
 				myfile >> t;
@@ -166,35 +167,35 @@ void Level::editorModeUpdate()
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
 	{
 		e = new Entity(_pWorld, et_wall);
-		e->setTexture(_pWorld->_textureHandler.getTexture(tt_wall));
+		e->setTexture(_pWorld->_pTextureHandler->getTexture(tt_wall));
 		e->setPosition(sf::Vector2f(xIndex * gridSize + 32.0, yIndex * gridSize + 32.0));
 		_entities[xIndex + yIndex * _xSize] = e;
 	}
 	else if(sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 	{
 		e = new Entity(_pWorld, et_plant);
-		e->setTexture(_pWorld->_textureHandler.getTexture(tt_plant));
+		e->setTexture(_pWorld->_pTextureHandler->getTexture(tt_plant));
 		e->setPosition(sf::Vector2f(xIndex * gridSize + 32.0, yIndex * gridSize + 32.0));
 		_entities[xIndex + yIndex * _xSize] = e;
 	}
 	else if(sf::Keyboard::isKeyPressed(sf::Keyboard::E))
 	{
 		e = new Entity(_pWorld, et_floor);
-		e->setTexture(_pWorld->_textureHandler.getTexture(tt_floor));
+		e->setTexture(_pWorld->_pTextureHandler->getTexture(tt_floor));
 		e->setPosition(sf::Vector2f(xIndex * gridSize + 32.0, yIndex * gridSize + 32.0));
 		_entities[xIndex + yIndex * _xSize] = e;
 	}
 	else if(sf::Keyboard::isKeyPressed(sf::Keyboard::R))
 	{
 		e = new Entity(_pWorld, et_grass);
-		e->setTexture(_pWorld->_textureHandler.getTexture(tt_grass));
+		e->setTexture(_pWorld->_pTextureHandler->getTexture(tt_grass));
 		e->setPosition(sf::Vector2f(xIndex * gridSize + 32.0, yIndex * gridSize + 32.0));
 		_entities[xIndex + yIndex * _xSize] = e;
 	}
 	else if(sf::Keyboard::isKeyPressed(sf::Keyboard::T))
 	{
 		e = new EnemyGrater(_pWorld);
-		e->setTexture(_pWorld->_textureHandler.getTexture(tt_grater));
+		e->setTexture(_pWorld->_pTextureHandler->getTexture(tt_grater));
 		e->setPosition(sf::Vector2f(xIndex * gridSize + 32.0, yIndex * gridSize + 32.0));
 		_entities[xIndex + yIndex * _xSize] = e;
 	}

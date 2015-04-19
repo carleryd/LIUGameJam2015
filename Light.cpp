@@ -24,8 +24,8 @@ _leftShade(5), _rightShade(5), _topShade(4)
 void Light::draw()
 {
 	_pWorld->_pWindow->draw(_lightCone);
-	_pWorld->_pWindow->draw(_leftShade);
-	_pWorld->_pWindow->draw(_rightShade);
+//	_pWorld->_pWindow->draw(_leftShade);
+//	_pWorld->_pWindow->draw(_rightShade);
 //	_pWorld->_pWindow->draw(_topShade);
 }
 

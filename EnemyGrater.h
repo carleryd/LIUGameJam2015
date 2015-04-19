@@ -8,5 +8,4 @@ public:
     void Draw();
     
 private:
-    int _gameDuration;
 };

@@ -10,7 +10,6 @@ class Entity
 public:
     Entity();
 	Entity(World* pWorld, EntityType entityType);
-	~Entity();
     
 	virtual void Update();
 	virtual void Draw();
