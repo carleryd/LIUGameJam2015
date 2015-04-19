@@ -41,7 +41,7 @@ void EnemyRabbit::Draw() {
     // animation stuff
     int walk = _drawWalkDuration % 40;
     _sprite.setTextureRect(sf::IntRect((walk-1)/10*64, 0, 64, 64));
-    _pWorld->_pWindow->draw(_sprite);
+	_pWorld->_pRenderTexture->draw(_sprite);
     if(_drawWalkDuration > 40000000) _drawWalkDuration = 0;
 
 }

@@ -33,8 +33,8 @@ Player::~Player()
 
 void Player::Draw()
 {
-	//if(!_pWorld->_editorMode)
-	//_light->draw();
+	if(!_pWorld->_editorMode)
+		_light->draw();
     // animation stuff
     int walk = _walkDuration % 40;
     _sprite.setTextureRect(sf::IntRect((walk-1)/10*64, 0, 64, 64));
@@ -100,28 +100,14 @@ void Player::Update()
         
 		if(Utility::SSCollision(tempPosX, getOrigin(), getSize(), e->getPosition(), e->getOrigin(), e->getSize()))
 		{
-            if(deltaSpeed.x > 0)
-            {
-                _pWorld->restart();
-            }
-            else if(deltaSpeed.x < 0)
-            {
-                _pWorld->restart();
-            }
-            deltaSpeed.x = 0;
+			_pWorld->restart();
+			return;
 		}
 		//Colission in Y
 		if(Utility::SSCollision(tempPosY, getOrigin(), getSize(), e->getPosition(), e->getOrigin(), e->getSize()))
 		{
-            if(deltaSpeed.y > 0)
-            {
-                _pWorld->restart();
-            }
-            else if(deltaSpeed.y < 0)
-            {
-                _pWorld->restart();
-            }
-            deltaSpeed.y = 0;
+			_pWorld->restart();
+			return;
         }
     }
 	for(Entity* e : _pWorld->_pLevel->_entities)

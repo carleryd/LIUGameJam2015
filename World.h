@@ -10,6 +10,9 @@ class Entity;
 class Enemy;
 class Textor;
 class TextureHandler;
+using namespace sf;
+class SoundBuffer;
+class Sound;
 
 class World
 {
@@ -35,5 +38,6 @@ public:
 	unsigned int _resolutionX;
 	unsigned int _resolutionY;
 private:
-	
+	SoundBuffer* _buffer;
+	Sound* _sound;
 };

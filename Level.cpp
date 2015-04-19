@@ -237,7 +237,6 @@ void Level::editorModeUpdate()
 		er->setPosition(sf::Vector2f(xIndex * gridSize + 32.0, yIndex * gridSize + 32.0));
 		_enemies.push_back(er);
 		_aLst = false;
-		std::cout <<"KANIN!";
 	}
 	else if(_sLst && !sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 	{
@@ -251,6 +250,7 @@ void Level::editorModeUpdate()
 	}
 	else if(sf::Keyboard::isKeyPressed(sf::Keyboard::P))
 	{
+		std::cout <<"Level saved";
 		save(_levelName);
 	}
 }

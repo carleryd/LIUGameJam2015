@@ -1,3 +1,4 @@
+#pragma once
 #include <SFML/Graphics.hpp>
 class World;
 
@@ -14,6 +15,8 @@ private:
 	sf::RenderWindow* _pWindow;
 	World* _pWorld;
 	GameState _GameState;
+
 	unsigned int _resolutionX;
 	unsigned int _resolutionY;
 };
+

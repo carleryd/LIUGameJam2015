@@ -4,6 +4,7 @@
 #include "OSHandler.h"
 #include "Textor.h"
 #include "TextureHandler.h"
+//#include <SFML/audio.hpp>
 
 World::World(sf::RenderWindow* pWindow, unsigned int resolutionX, unsigned int resolutionY)
 {
@@ -25,6 +26,10 @@ World::World(sf::RenderWindow* pWindow, unsigned int resolutionX, unsigned int r
 		_pLevel->initEditorMode(20, 15,_pTextureHandler->getResourcePath() + "Levels/1.lvl");
 	else
 		_pLevel->load(_pTextureHandler->getResourcePath() + "Levels/1.lvl");
+		/*_buffer = new sf::SoundBuffer();
+		_sound = new sf::Sound();
+		_buffer.loadFromFile(getResourcePath() + "apple_bite.wav");
+		_sound.setBuffer(_buffer);*/
 }
 
 
@@ -51,6 +56,7 @@ void World::restart() {
 	_pPlayer = new Player(this);
 	_pPlayer->setPosition(sf::Vector2f(64.0 * 10.0 + 32.0, 64.0 * 10.0 + 31.0));
 	_pLevel->load(_pTextureHandler->getResourcePath() + "Levels/1.lvl");
+	//_sound.play();
 }
 
 

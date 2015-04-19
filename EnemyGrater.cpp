@@ -12,5 +12,5 @@ void EnemyGrater::Update() {
 void EnemyGrater::Draw() {
     int steps = _pWorld->_gameDuration % 16;//
     _sprite.setTextureRect(sf::IntRect((steps-1)/4*64, 0, 64, 64));
-    _pWorld->_pWindow->draw(_sprite);
+    _pWorld->_pRenderTexture->draw(_sprite);
 }
