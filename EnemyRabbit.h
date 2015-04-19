@@ -8,7 +8,7 @@ public:
     ~EnemyRabbit();
     void Update();
     void Draw();
-//    bool aggro();
+    bool aggro();
     void collisionHandling();
     void setInLight(bool inLight);
 

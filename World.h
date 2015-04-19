@@ -1,5 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio/Sound.hpp>
+#include <SFML/Audio.hpp>
 #include <vector>
 #include <iostream>
 #include "Level.h"
@@ -32,6 +34,7 @@ public:
 	sf::RenderWindow* _pWindow;
 	sf::Shader _mainShader;
     Textor* _pTextor;
+    sf::Vector2f _spawn;
     
     
     sf::Clock _clock;
@@ -44,6 +47,6 @@ public:
 	unsigned int _resolutionX;
 	unsigned int _resolutionY;
 private:
-	SoundBuffer* _buffer;
-	Sound* _sound;
+    sf::SoundBuffer _buffer;
+    sf::Sound _sound;
 };

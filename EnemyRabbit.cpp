@@ -12,9 +12,9 @@ EnemyRabbit::EnemyRabbit(World* pWorld) : Enemy(pWorld, et_rabbit) {
 }
 
 void EnemyRabbit::Update() {
-	if(/*aggro() || */_inLight) {
+	if(aggro() && _inLight) {
         _rotation = Utility::angle(_pWorld->_pPlayer->getPosition(), getPosition()) - 90;
-        _speed = 3.0;
+        _speed = 1.5;
         _walkDuration = 0;
     }
     else {
@@ -50,15 +50,15 @@ void EnemyRabbit::setInLight(bool inLight) {
     _inLight = inLight;
 }
 
-//bool EnemyRabbit::aggro() {
-//    sf::Vector2f diff = _pWorld->_pPlayer->getPosition() - getPosition();
-//    float length = fabs(sqrt(pow(diff.x, 2) + pow(diff.y, 2)));
-//    
-//    if(length < 200) {
-//        return true;
-//    }
-//    return false;
-//}
+bool EnemyRabbit::aggro() {
+    sf::Vector2f diff = _pWorld->_pPlayer->getPosition() - getPosition();
+    float length = fabs(sqrt(pow(diff.x, 2) + pow(diff.y, 2)));
+    
+    if(length < 200) {
+        return true;
+    }
+    return false;
+}
 
 void EnemyRabbit::collisionHandling() {
     _sprite.setRotation(_rotation);

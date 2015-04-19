@@ -18,19 +18,20 @@ World::World(sf::RenderWindow* pWindow, unsigned int resolutionX, unsigned int r
     _pTextor = new Textor(_pTextureHandler->getResourcePath());
 	_pLevel = new Level(this);
 	_pPlayer = new Player(this);
-	_pPlayer->setPosition(sf::Vector2f(64.0 * 10.0 + 32.0, 64.0 * 10.0 + 31.0));
+    _spawn = sf::Vector2f(2*64, 13*64 + 10);
+	_pPlayer->setPosition(_spawn);
     _restart = false;
 
 	//DONT FORGET TO CHANGE LEVELNAME IN initEditorMode!
 	_editorMode = false;
 	if(_editorMode)
-		_pLevel->initEditorMode(20, 15,_pTextureHandler->getResourcePath() + "Levels/1.lvl");
+		_pLevel->initEditorMode(20, 15, _pTextureHandler->getResourcePath() + "Levels/1.lvl");
 	else
 		_pLevel->load(_pTextureHandler->getResourcePath() + "Levels/1.lvl");
-		/*_buffer = new sf::SoundBuffer();
-		_sound = new sf::Sound();
-		_buffer.loadFromFile(getResourcePath() + "apple_bite.wav");
-         _sound.setBuffer(_buffer);*/
+//		_buffer = new sf::SoundBuffer();
+//		_sound = new sf::Sound();
+    _buffer.loadFromFile(_pTextureHandler->getResourcePath() + "/Sounds/death_sound.wav");
+    _sound.setBuffer(_buffer);
     _clock.restart();
 }
 
@@ -42,24 +43,21 @@ World::~World()
 void World::restart() {
     _gameDuration = 0;
     _pTextor->writeTemporaryText("You have to be more careful!",
-                                 _pPlayer->getPosition() + sf::Vector2f(0, -200), 70, sf::Color::White, 1);
+                                 sf::Vector2f(_spawn.x - 300, _spawn.y - 230), 50, sf::Color::White, 3);
 	
     while(_gameDuration < 1000) {
         _gameDuration++;
     }
     
-//    for(Entity* rabbit : _rabbits) {
-//        delete rabbit;
-//    }
     while(_pLevel->_enemies.size() != 0) {
         delete _pLevel->_enemies.back();
         _pLevel->_enemies.pop_back();
     }
     
 	_pPlayer = new Player(this);
-	_pPlayer->setPosition(sf::Vector2f(64.0 * 10.0 + 32.0, 64.0 * 10.0 + 31.0));
+	_pPlayer->setPosition(_spawn);
 	_pLevel->load(_pTextureHandler->getResourcePath() + "Levels/1.lvl");
-	//_sound.play();
+	_sound.play();
     _clock.restart();
     _restart = true;
 }
