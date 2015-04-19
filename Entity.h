@@ -3,7 +3,7 @@
 #include <list>
 class World;
 
-enum EntityType {et_moving, et_wall, et_floor};
+enum EntityType { et_moving, et_wall, et_floor, et_plant, et_rabbit, et_grater, et_grass };
 
 class Entity
 {
@@ -15,9 +15,10 @@ public:
 	virtual void Update();
 	virtual void Draw();
 	virtual void setTexture(sf::Texture* texture);
-    virtual void setAnimationTexture(sf::Texture* textures, int animationCount);
 	sf::Vector2f getPosition();
 	void setPosition(const sf::Vector2f position);
+	void setPositionX(float x);
+	void setPositionY(float y);
 	float getSize();
 	void setSize(const float size);
 	sf::Vector2f getOrigin();
@@ -27,7 +28,5 @@ public:
 	World* _pWorld;
 protected:
 	sf::Sprite _sprite;
-    std::vector<sf::Sprite> _sprites;
 	float _size;
-    bool animation;
 };

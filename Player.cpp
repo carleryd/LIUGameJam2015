@@ -1,6 +1,7 @@
 #include "Player.h"
 #include "Utility.h"
 #include "World.h"
+#include "Enemy.h"
 #include <math.h>
 #include <iostream>
 using namespace std;
@@ -12,21 +13,18 @@ using namespace std;
 Player::Player(World* pWorld) : Entity(pWorld, et_moving)
 {
 	setTexture(pWorld->_textureHandler.getTexture(tt_player_animation_4));
-//    setAnimationTexture(pWorld->_textureHandler.getTexture(tt_player_animation_4), 4);
-    setTexture(pWorld->_textureHandler.getTexture(tt_player_animation_4));
 	_rotation = 0;
 	_speed = 0;
 	_maxSpeed = 3;
 	_sprite.setOrigin(32, 32);
 
-	_light = std::unique_ptr<Light>(new Light(pWorld, this));
-
+	_light = new Light(pWorld, this);
 }
 
 
 Player::~Player()
 {
-
+	delete _light;
 }
 
 
@@ -79,40 +77,76 @@ void Player::Update()
 	sf::Vector2f tempPosY = getPosition();
 	tempPosX.x += deltaSpeed.x;
 	tempPosY.y += deltaSpeed.y;
-	for(Entity* e : _pWorld->entities)
-	{
+    
+    sf::Vector2f spawnPosition(500, 700);
+	for(Enemy* e : _pWorld->_pLevel->_enemies) {
 		//Colission in X
 		if(Utility::SSCollision(tempPosX, getOrigin(), getSize(), e->getPosition(), e->getOrigin(), e->getSize()))
 		{
-			if(e->_entityType == et_wall)
-			{
-				if(deltaSpeed.x > 0)
-				{
-					setPositionX(e->getPosition().x - e->getOrigin().x - getSize() + getOrigin().x - 1);
-					std::cout <<"RIGHT\n";
-				}
-				else
-				{
-					setPositionX(e->getPosition().x + e->getOrigin().x + e->getSize() + getOrigin().x + 1);
-					std::cout <<"LEFT \n";
-				}
-				deltaSpeed.x = 0;
-			}
+            if(deltaSpeed.x > 0)
+            {
+                _pWorld->restart();
+//                setPosition(spawnPosition);
+            }
+            else if(deltaSpeed.x < 0)
+            {
+                _pWorld->restart();
+//                setPosition(spawnPosition);
+            }
+            deltaSpeed.x = 0;
 		}
 		//Colission in Y
 		if(Utility::SSCollision(tempPosY, getOrigin(), getSize(), e->getPosition(), e->getOrigin(), e->getSize()))
 		{
-			if(e->_entityType == et_wall)
+            if(deltaSpeed.y > 0)
+            {
+                _pWorld->restart();
+//                setPosition(spawnPosition);
+            }
+            else if(deltaSpeed.y < 0)
+            {
+                _pWorld->restart();
+//                setPosition(spawnPosition);
+            }
+            deltaSpeed.y = 0;
+        }
+    }
+	for(Entity* e : _pWorld->_pLevel->_entities)
+	{
+		if(e != nullptr)
+		{
+			//Colission in X
+			if(Utility::SSCollision(tempPosX, getOrigin(), getSize(), e->getPosition(), e->getOrigin(), e->getSize()))
 			{
-				if(deltaSpeed.y > 0)
+				if(e->_entityType == et_wall)
 				{
-					setPositionY(e->getPosition().y - e->getOrigin().y  - getSize() + getOrigin().y - 1);
+					if(deltaSpeed.x > 0)
+					{
+						setPositionX(e->getPosition().x - e->getOrigin().x - getSize() + getOrigin().x - 1);
+
+					}
+					else if(deltaSpeed.x < 0)
+					{
+						setPositionX(e->getPosition().x - e->getOrigin().x + e->getSize() + getOrigin().x + 1);
+					}
+					deltaSpeed.x = 0;
 				}
-				else
+			}
+			//Colission in Y
+			if(Utility::SSCollision(tempPosY, getOrigin(), getSize(), e->getPosition(), e->getOrigin(), e->getSize()))
+			{
+				if(e->_entityType == et_wall)
 				{
-					setPositionY(e->getPosition().y + e->getOrigin().y + e->getSize() + getOrigin().y + 1);
+					if(deltaSpeed.y > 0)
+					{
+						setPositionY(e->getPosition().y - e->getOrigin().y  - getSize() + getOrigin().y - 1);
+					}
+					else if(deltaSpeed.y < 0)
+					{
+						setPositionY(e->getPosition().y - e->getOrigin().y + e->getSize() + getOrigin().y + 1);
+					}
+					deltaSpeed.y = 0;
 				}
-				deltaSpeed.y = 0;
 			}
 		}
 	}
@@ -123,20 +157,7 @@ void Player::Update()
 	_light->update(direction, _rotation);
 }
 
-
 void Player::setRotation(float Rotation)
 {
 	_sprite.setRotation(Rotation);
-}
-
-
-void Player::setPositionX(float x)
-{
-	_sprite.setPosition(x, _sprite.getPosition().y);
-}
-
-
-void Player::setPositionY(float y)
-{
-	_sprite.setPosition(_sprite.getPosition().x, y);
 }

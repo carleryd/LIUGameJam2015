@@ -7,45 +7,16 @@ World::World(sf::RenderWindow* pWindow)
 {
 	_pWindow = pWindow;
     
-	Entity* e = new Entity(this, et_wall);
-	e->setTexture(_textureHandler.getTexture(tt_wall));
-	e->setPosition(sf::Vector2f(300.0, 300.0));
-	entities.push_back(e);
-    
-	e = new Entity(this, et_wall);
-	e->setPosition(sf::Vector2f(364.0, 364.0));
-	e->setTexture(_textureHandler.getTexture(tt_wall));
-    entities.push_back(e);
-
-	e = new Entity(this, et_wall);
-	e->setPosition(sf::Vector2f(600.0, 500.0));
-	e->setTexture(_textureHandler.getTexture(tt_wall));
-    entities.push_back(e);
-
-    Entity* plant1 = new Entity(this, et_wall);
-    Entity* plant2 = new Entity(this, et_wall);
-    Entity* plant3 = new Entity(this, et_wall);
-  	plant1->setPosition(sf::Vector2f(300.0, 100.0));
-   	plant2->setPosition(sf::Vector2f(400.0, 100.0));
-   	plant3->setPosition(sf::Vector2f(500.0, 100.0));
-	//Vet inte var man ska sätta sökvägen
-    
-    Enemy* rabbit = new EnemyRabbit(this);
-    rabbit->setPosition(sf::Vector2f(500.0, 450.0));
-
+	_pLevel = new Level(this);
 	_pPlayer = new Player(this);
-	_pPlayer->setPosition(sf::Vector2f(200.0, 200.0));
-    
-    rabbit->setTexture(_textureHandler.getTexture(tt_rabbit));
-    plant1->setTexture(_textureHandler.getTexture(tt_plant));
-    plant2->setTexture(_textureHandler.getTexture(tt_plant));
-    plant3->setTexture(_textureHandler.getTexture(tt_plant));
+	_pPlayer->setPosition(sf::Vector2f(64.0 * 10.0 + 32.0, 64.0 * 10.0 + 31.0));
 
-	entities.push_back(e);
-    entities.push_back(plant1);
-    entities.push_back(plant2);
-    entities.push_back(plant3);
-    rabbits.push_back(rabbit);
+	//DONT FORGET TO CHANGE LEVELNAME IN initEditorMode!
+	_editorMode = false;
+	if(_editorMode)
+		_pLevel->initEditorMode(20, 15,_textureHandler.getResourcePath() + "Levels/1.lvl");
+	else
+		_pLevel->load(_textureHandler.getResourcePath() + "Levels/1.lvl");
 }
 
 
@@ -53,25 +24,44 @@ World::~World()
 {
 }
 
+void World::restart() {
+	_pPlayer = new Player(this);
+	_pPlayer->setPosition(sf::Vector2f(64.0 * 10.0 + 32.0, 64.0 * 10.0 + 31.0));
+	_pLevel->load(_textureHandler.getResourcePath() + "Levels/1.lvl");
+}
+
 
 void World::Update()
 {
 	_pPlayer->Update();
-    for(Enemy* rabbit : rabbits) {
-        rabbit->Update();
+
+	for(Entity* e :_pLevel->_entities) 
+	{
+		if(e != nullptr)
+			e->Update();
     }
+	for(Enemy* e : _pLevel->_enemies)
+	{
+		e->Update();
+	}
+
+	if(_editorMode)
+		_pLevel->editorModeUpdate();
 }
 
 void World::Draw()
 {
 	_pWindow->clear(sf::Color::White);
-    for(Entity* e : entities) {
+    
+    for(Entity* e : _pLevel->_entities)
+	{
+		if(e != nullptr)
+			e->Draw();
+	}
+	for(Enemy* e : _pLevel->_enemies)
+	{
 		e->Draw();
 	}
-    for(Enemy* rabbit : rabbits) {
-        rabbit->Draw();
-        rabbit->Update();
-    }
 	_pPlayer->Draw();
 	_pWindow->display();
 }

@@ -1,3 +1,3 @@
 #include "Enemy.h"
 
-Enemy::Enemy(World* pWorld) : Entity(pWorld, et_moving) {}
+Enemy::Enemy(World* pWorld, EntityType entityType) : Entity(pWorld, entityType) {}
