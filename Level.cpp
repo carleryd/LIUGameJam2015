@@ -115,7 +115,7 @@ void editorModeUpdate()
 {
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
 	{
-
+		_entities.pushBack();
 	}
 	else if(sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 	{
