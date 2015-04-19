@@ -1,7 +1,7 @@
 #include "Level.h"
 #include <fstream>
-#include <iostream>
 #include "EnemyRabbit.h"
+#include "EnemyGrater.h"
 #include "World.h"
 
 using namespace std;
@@ -13,13 +13,11 @@ Level::Level(World* pWorld)
 	gridSize = 64;
 }
 
-
 Level::~Level()
 {
 	for(Entity* e : _entities)
 		delete e;
 }
-
 
 void Level::load(const std::string filename)
 {
@@ -79,6 +77,7 @@ void Level::load(const std::string filename)
 				e->setPosition(sf::Vector2f(x, y));
 				_entities.push_back(e);
 			}
+            
 			//Grass
 			else if(t == "E")
 			{
@@ -90,9 +89,19 @@ void Level::load(const std::string filename)
 				float y = stof(t);
 				e->setPosition(sf::Vector2f(x, y));
 				_entities.push_back(e);
+            }
+            //Grater
+			else if(t == "F")
+			{
+				Enemy* er = new EnemyGrater(_pWorld);
+				er->setTexture(_pWorld->_textureHandler.getTexture(tt_grater_animation_4));
+				myfile >> t;
+				float x = stof(t);
+				myfile >> t;
+				float y = stof(t);
+				er->setPosition(sf::Vector2f(x, y));
+				_enemies.push_back(er);
 			}
-
-
 		}
 		myfile.close();
 	}
@@ -101,7 +110,7 @@ void Level::load(const std::string filename)
 
 void Level::save(const std::string filename)
 {
-	std::cout <<"level saved as " <<_levelName <<"! \n";
+//	std::cout <<"level saved as " <<_levelName <<"! \n";
 	ofstream myfile (filename);
   if (myfile.is_open())
   {
@@ -119,6 +128,8 @@ void Level::save(const std::string filename)
 				myfile <<"D ";
 			else if(e->_entityType == et_grass)
 				myfile <<"E ";
+			else if(e->_entityType == et_grater)
+				myfile <<"F ";
 
 			myfile <<e->getPosition().x <<" " <<e->getPosition().y <<" ";
 		}

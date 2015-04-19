@@ -17,12 +17,17 @@ World::World(sf::RenderWindow* pWindow)
 		_pLevel->initEditorMode(20, 15,_textureHandler.getResourcePath() + "Levels/1.lvl");
 	else
 		_pLevel->load(_textureHandler.getResourcePath() + "Levels/1.lvl");
-
 }
 
 
 World::~World()
 {
+}
+
+void World::restart() {
+	_pPlayer = new Player(this);
+	_pPlayer->setPosition(sf::Vector2f(64.0 * 10.0 + 32.0, 64.0 * 10.0 + 31.0));
+	_pLevel->load(_textureHandler.getResourcePath() + "Levels/1.lvl");
 }
 
 

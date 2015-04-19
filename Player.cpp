@@ -13,7 +13,6 @@ using namespace std;
 Player::Player(World* pWorld) : Entity(pWorld, et_moving)
 {
 	setTexture(pWorld->_textureHandler.getTexture(tt_player_animation_4));
-    setTexture(pWorld->_textureHandler.getTexture(tt_player_animation_4));
 	_rotation = 0;
 	_speed = 0;
 	_maxSpeed = 3;
@@ -86,11 +85,13 @@ void Player::Update()
 		{
             if(deltaSpeed.x > 0)
             {
-                setPosition(spawnPosition);
+                _pWorld->restart();
+//                setPosition(spawnPosition);
             }
             else if(deltaSpeed.x < 0)
             {
-                setPosition(spawnPosition);
+                _pWorld->restart();
+//                setPosition(spawnPosition);
             }
             deltaSpeed.x = 0;
 		}
@@ -99,11 +100,13 @@ void Player::Update()
 		{
             if(deltaSpeed.y > 0)
             {
-                setPosition(spawnPosition);
+                _pWorld->restart();
+//                setPosition(spawnPosition);
             }
             else if(deltaSpeed.y < 0)
             {
-                setPosition(spawnPosition);
+                _pWorld->restart();
+//                setPosition(spawnPosition);
             }
             deltaSpeed.y = 0;
         }

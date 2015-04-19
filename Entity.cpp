@@ -4,7 +4,6 @@
 Entity::Entity() {}
 Entity::Entity(World* pWorld, EntityType entityType)
 {
-    animation = false;
 	_pWorld = pWorld;
 	_size = 64.0;
 	_entityType = entityType;
@@ -26,13 +25,7 @@ void Entity::Update()
 
 void Entity::Draw()
 {
-    if(animation) {
-        // fixa
-        _pWorld->_pWindow->draw(_sprites.front());
-    }
-    else {
-		_pWorld->_pWindow->draw(_sprite);
-    }
+    _pWorld->_pWindow->draw(_sprite);
 }
 
 
@@ -41,17 +34,6 @@ void Entity::setTexture(sf::Texture* texture)
 {
 	_sprite.setTexture(*texture);
 }
-
-void Entity::setAnimationTexture(sf::Texture* texture, int animationCount) {
-    animation = true;
-    for(int i = 0; i < animationCount; ++i) {
-        sf::Sprite sprite;
-        sprite.setTexture(*texture);
-        sprite.setTextureRect(sf::IntRect(i*64, 0, (i+1)*64, 64));
-        _sprites.push_back(sprite);
-    }
-}
-
 
 void Entity::setPosition(const sf::Vector2f position)
 {

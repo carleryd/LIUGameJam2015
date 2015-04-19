@@ -17,6 +17,7 @@ public:
 	void Update();
 	void Draw();
     Player* getPlayer();
+	void restart();
 	
 	TextureHandler _textureHandler;
 	Level* _pLevel;
