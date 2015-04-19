@@ -30,15 +30,16 @@ Player::~Player()
 
 void Player::Draw()
 {
+	//if(!_pWorld->_editorMode)
+	//_light->draw();
     // animation stuff
     int walk = _walkDuration % 40;
     _sprite.setTextureRect(sf::IntRect((walk-1)/10*64, 0, 64, 64));
-    _pWorld->_pWindow->draw(_sprite);
+	_pWorld->_pRenderTexture->draw(_sprite);
 	
 
 	//temp? :)
-	if(!_pWorld->_editorMode)
-		_light->draw();
+
 }
 
 

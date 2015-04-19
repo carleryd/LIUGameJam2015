@@ -25,7 +25,7 @@ void Entity::Update()
 
 void Entity::Draw()
 {
-    _pWorld->_pWindow->draw(_sprite);
+	_pWorld->_pRenderTexture->draw(_sprite);
 }
 
 

@@ -1,11 +1,13 @@
 #include "Game.h"
-
+#include "World.h"
 
 Game::Game()
 {
-	_pWindow = new sf::RenderWindow(sf::VideoMode(1224, 768), "CAROTTEN BITTE!");
+	_resolutionX = 1224;
+	_resolutionY = 768;
+	_pWindow = new sf::RenderWindow(sf::VideoMode(_resolutionX, _resolutionY), "CAROTTEN BITTE!");
     _pWindow->setFramerateLimit(100);
-	_pWorld = new World(_pWindow);
+	_pWorld = new World(_pWindow, _resolutionX, _resolutionY);
 	_GameState = Running;
 }
 

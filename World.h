@@ -12,7 +12,7 @@ class Enemy;
 class World
 {
 public:
-	World(sf::RenderWindow* pWindow);
+	World(sf::RenderWindow* pWindow, unsigned int resolutionX, unsigned int resolutionY);
 	~World();
 	void Update();
 	void Draw();
@@ -24,7 +24,9 @@ public:
 	std::list<Entity*> _entities;
     std::list<Entity*> _rabbits;
 	Player* _pPlayer;
+	sf::RenderTexture* _pRenderTexture;
 	sf::RenderWindow* _pWindow;
+	sf::Shader _mainShader;
 	bool _editorMode;
 private:
 	

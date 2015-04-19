@@ -1,5 +1,5 @@
 #include <SFML/Graphics.hpp>
-#include "World.h"
+class World;
 
 enum GameState {Menu, Running, PauseMenu};
 
@@ -14,4 +14,6 @@ private:
 	sf::RenderWindow* _pWindow;
 	World* _pWorld;
 	GameState _GameState;
+	unsigned int _resolutionX;
+	unsigned int _resolutionY;
 };
