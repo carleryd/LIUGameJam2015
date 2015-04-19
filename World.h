@@ -10,6 +10,9 @@ class Entity;
 class Enemy;
 class Textor;
 class TextureHandler;
+using namespace sf;
+class SoundBuffer;
+class Sound;
 
 class World
 {
@@ -31,5 +34,6 @@ public:
     int _gameDuration;
 	bool _editorMode;
 private:
-	
+	SoundBuffer* _buffer;
+	Sound* _sound;
 };
