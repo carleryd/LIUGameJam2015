@@ -171,6 +171,11 @@ void Player::Update()
 	//temp
 	Utility::vMul(direction, 50);
 	_light->update(direction, _rotation);
+
+	sf::View v = _pWorld->_pWindow->getView();
+	v.setCenter(getPosition());
+	_pWorld->_pWindow->setView(v);
+
 }
 
 void Player::setRotation(float Rotation)
