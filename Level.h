@@ -22,4 +22,6 @@ public:
 	int _xSize;
 	int _ySize;
 	std::string _levelName;
+	bool _aLst;
+	bool _sLst;
 };

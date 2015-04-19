@@ -2,6 +2,8 @@
 #include "Utility.h"
 #include "World.h"
 #include "EnemyRabbit.h"
+#include "Textor.h"
+#include "TextureHandler.h"
 #include <math.h>
 #include <iostream>
 using namespace std;
@@ -12,7 +14,8 @@ using namespace std;
 
 Player::Player(World* pWorld) : Entity(pWorld, et_moving)
 {
-	setTexture(pWorld->_textureHandler.getTexture(tt_player));
+	setTexture(pWorld->_pTextureHandler->getTexture(tt_player));
+    
 	_rotation = 0;
 	_speed = 0;
 	_maxSpeed = 3;
@@ -87,14 +90,11 @@ void Player::Update()
         angleToEnemy = Utility::angleComplete(e->getPosition(), getPosition());
         angleLightA = Utility::angleComplete(_light->getVertexArray()[1].position, getPosition());
         angleLightB = Utility::angleComplete(_light->getVertexArray()[2].position, getPosition());
-        cout << "A: " << angleLightA << " B: " << angleLightB << " Enemy: " << angleToEnemy << endl;
         EnemyRabbit* rabbit = dynamic_cast<EnemyRabbit*>(e);
         if(angleLightA < angleToEnemy && angleToEnemy < angleLightB) {
             rabbit->setInLight(true);
-            cout << "IN LIGHT" << endl;
         }
         else {
-            cout << "OUT LIGHT" << endl;
             rabbit->setInLight(false);
         }
         
@@ -103,12 +103,10 @@ void Player::Update()
             if(deltaSpeed.x > 0)
             {
                 _pWorld->restart();
-//                setPosition(spawnPosition);
             }
             else if(deltaSpeed.x < 0)
             {
                 _pWorld->restart();
-//                setPosition(spawnPosition);
             }
             deltaSpeed.x = 0;
 		}
@@ -118,12 +116,10 @@ void Player::Update()
             if(deltaSpeed.y > 0)
             {
                 _pWorld->restart();
-//                setPosition(spawnPosition);
             }
             else if(deltaSpeed.y < 0)
             {
                 _pWorld->restart();
-//                setPosition(spawnPosition);
             }
             deltaSpeed.y = 0;
         }
@@ -172,6 +168,11 @@ void Player::Update()
 	//temp
 	Utility::vMul(direction, 50);
 	_light->update(direction, _rotation);
+
+	sf::View v = _pWorld->_pRenderTexture->getView();
+	v.setCenter(getPosition());
+	_pWorld->_pRenderTexture->setView(v);
+
 }
 
 void Player::setRotation(float Rotation)

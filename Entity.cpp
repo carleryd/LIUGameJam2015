@@ -10,24 +10,15 @@ Entity::Entity(World* pWorld, EntityType entityType)
     _sprite.setOrigin(sf::Vector2f(_size/2, _size/2));
 }
 
-
-Entity::~Entity()
-{
-
-}
-
-
 void Entity::Update()
 {
 
 }
 
-
 void Entity::Draw()
 {
 	_pWorld->_pRenderTexture->draw(_sprite);
 }
-
 
 
 void Entity::setTexture(sf::Texture* texture)

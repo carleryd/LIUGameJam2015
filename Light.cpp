@@ -26,7 +26,8 @@ void Light::draw()
 	_pWorld->_pRenderTexture->draw(_lightCone);
 	_pWorld->_pRenderTexture->draw(_leftShade);
 	_pWorld->_pRenderTexture->draw(_rightShade);
-//	_pWorld->_pWindow->draw(_topShade);
+	_pWorld->_pRenderTexture->draw(_lightCone);
+
 }
 
 sf::VertexArray& Light::getVertexArray() {
