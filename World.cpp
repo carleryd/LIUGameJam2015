@@ -79,7 +79,6 @@ void World::Draw()
 		if(e != nullptr)
 			e->Draw();
 	}
-    cout << "Amount of enemies: " << _pLevel->_enemies.size() << endl;
 	for(Enemy* e : _pLevel->_enemies)
 	{
 		e->Draw();

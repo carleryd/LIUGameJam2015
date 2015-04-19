@@ -90,7 +90,7 @@ void Player::Update()
         angleLightA = Utility::angleComplete(_light->getVertexArray()[1].position, getPosition());
         angleLightB = Utility::angleComplete(_light->getVertexArray()[2].position, getPosition());
         EnemyRabbit* rabbit = dynamic_cast<EnemyRabbit*>(e);
-        if(angleLightA < angleToEnemy && angleToEnemy < angleLightB) {
+        if(angleLightA - 5 < angleToEnemy && angleToEnemy < angleLightB + 5) {
             rabbit->setInLight(true);
         }
         else {
